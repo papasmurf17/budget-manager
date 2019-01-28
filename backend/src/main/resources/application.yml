@@ -6,3 +6,13 @@ micronaut:
   application:
     name: backend
 
+mongodb:
+  uri: mongodb://mongoadmin:secret@localhost:27017/bm
+
+endpoints:
+  beans:
+    enabled: true
+    sensitive: false
+  routes:
+    enabled: true
+    sensitive: false
