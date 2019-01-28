@@ -47,7 +47,7 @@ shadowJar {
 
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
 
-mainClassName = "backend.Application"
+mainClassName = "ch.papasmurf.bm.backend.Application"
 
 test {
     useJUnitPlatform()
