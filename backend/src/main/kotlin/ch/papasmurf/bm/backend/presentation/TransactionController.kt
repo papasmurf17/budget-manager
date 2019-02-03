@@ -1,9 +1,11 @@
 package ch.papasmurf.bm.backend.presentation
 
 import ch.papasmurf.bm.backend.dal.TransactionRepository
+import ch.papasmurf.bm.backend.dal.entity.Transaction
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 /**
@@ -13,7 +15,10 @@ import io.reactivex.Single
 class TransactionController(val repository: TransactionRepository) {
 
     @Get("/all")
-    fun transactions() = Single.just("Foo")
+    fun transactions() =
+//    fun transactions() = Flowable.fromPublisher<List<Transaction>> {
+        repository.getAll()
+//    }.toList()
 
     @Post("/")
     fun addTransaction() = repository.addTransaction()

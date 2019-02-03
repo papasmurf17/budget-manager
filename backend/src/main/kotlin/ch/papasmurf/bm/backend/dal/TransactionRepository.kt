@@ -11,13 +11,19 @@ import javax.inject.Singleton
  */
 @Singleton
 class TransactionRepository(val mongoClient: MongoClient) {
-    fun addTransaction() = mongoClient
+    private fun repo() = mongoClient
         .getDatabase("bm")
         .getCollection("transactions", Transaction::class.java)
-        .insertOne(Transaction(
+
+    fun addTransaction() = repo()
+        .insertOne(
+            Transaction(
+            null,
             "Budget 2019",
             BigDecimal(20000),
             expenseType = ExpensesTypes.CREDIT,
             user = "WellD"
         ))!!
+
+    fun getAll() = repo().find()!!
 }
