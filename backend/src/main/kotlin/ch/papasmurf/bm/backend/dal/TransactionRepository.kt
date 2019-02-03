@@ -19,5 +19,5 @@ class TransactionRepository(val mongoClient: MongoClient) {
             BigDecimal(20000),
             expenseType = ExpensesTypes.CREDIT,
             user = "WellD"
-        ))
+        ))!!
 }
