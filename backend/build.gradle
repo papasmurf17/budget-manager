@@ -14,6 +14,8 @@ group "backend"
 repositories {
     mavenLocal()
     mavenCentral()
+    jcenter()
+    google()
     maven { url "https://jcenter.bintray.com" }
 }
 
@@ -36,7 +38,7 @@ dependencies {
     compile "io.micronaut:micronaut-http-client"
     compile "io.micronaut:micronaut-http-server-netty"
     compile "io.micronaut.configuration:micronaut-mongo-reactive"
-    compile "io.micronaut.graphql:micronaut-graphql:1.0.0.BUILD-SNAPSHOT"
+//    compile "io.micronaut.graphql:micronaut-graphql:1.0.0.BUILD-SNAPSHOT"
 
     kapt "io.micronaut:micronaut-inject-java"
     kapt "io.micronaut:micronaut-validation"
