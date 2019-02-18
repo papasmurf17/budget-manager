@@ -1,7 +1,10 @@
 import express from 'express';
-import SERVER from './data/schema';
+
+import SERVER from './graphql/schema';
+import mongoose from './config/mongoose';
 
 const graphQLServer = express();
+const db = mongoose();
 
 SERVER.applyMiddleware({
   app: graphQLServer
