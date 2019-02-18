@@ -2,21 +2,27 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import {  MockList } from 'apollo-server';
 import casual from 'casual';
 
+import resolvers from './resolvers.js';
+
 // Imports: GraphQL TypeDefs & Resolvers
 // import TYPEDEFS from './types.js';
-// import RESOLVERS from './resolvers.js';
 
 // import mocks from './mocks';
 
 const typeDefs = gql`
-type Person {
-  name: String,
-  age: Int,
+type Transaction {
+  _id: ID!,
+  amount: Float,
+  currencyCode: String,
+  description: String,
+  expenseType: String,
+  invoiceDate: String,
+  user: String
 }
 
 type Query {
-  person: Person,
-  people: [Person]
+  getTransactions: [Transaction]
+  getTransaction: Transaction
 }
 `;
 
@@ -33,8 +39,8 @@ const mocks = {
 // GraphQL: Schema
 const SERVER = new ApolloServer({
   typeDefs,
-  mocks,
-  // resolvers: RESOLVERS,
+  //mocks,
+  resolvers,
   playground: {
     endpoint: `http://localhost:4000/graphql`,
     settings: {
