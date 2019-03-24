@@ -8,7 +8,8 @@ const fakeTransaction = () => ({
   description: casual.description,
   expenseType: casual.word,
   invoiceDate: casual.date,
-  user: casual.username
+  user: casual.username,
+  reporter: casual.username
 });
 
 module.exports = {

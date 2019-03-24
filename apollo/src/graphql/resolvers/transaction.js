@@ -15,7 +15,8 @@ const addTransaction = transaction => new Transaction({
   description: transaction.description,
   expenseType: transaction.expenseType,
   invoiceDate: transaction.invoiceDate,
-  user: transaction.user
+  user: transaction.user,
+  reporter: transaction.reporter
 }).save();
 
 module.exports = {

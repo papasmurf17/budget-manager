@@ -9,7 +9,8 @@ const transactionSchema = new Schema({
   description: String,
   expenseType: String,
   invoiceDate: Date,
-  user: String
+  user: String,
+  reporter: String
 });
 
 module.exports = mongoose.model('Transaction', transactionSchema);
