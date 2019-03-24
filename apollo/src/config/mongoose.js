@@ -1,11 +1,11 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-import config from './config';
+const config = require('./config');
 
 const env = process.env.NODE_ENV || 'development';
 const currentConfig = config[env];
 
-export default () => {
+module.exports = () => {
   mongoose.Promise = global.Promise;
 
   const db = mongoose.connect(currentConfig.db, { useNewUrlParser: true });

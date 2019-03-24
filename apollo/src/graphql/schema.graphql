@@ -1,0 +1,14 @@
+type Transaction {
+    _id: ID!,
+    amount: Float,
+    currencyCode: String,
+    description: String,
+    expenseType: String,
+    invoiceDate: String,
+    user: String
+}
+
+type Query {
+    Transactions: [Transaction]
+    Transaction: Transaction
+}

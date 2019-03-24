@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
@@ -13,4 +13,4 @@ const transactionSchema = new Schema({
   user: String
 });
 
-export default mongoose.model('Transaction', transactionSchema);
+module.exports = mongoose.model('Transaction', transactionSchema);

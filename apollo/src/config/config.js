@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   development: {
     db: 'mongodb://mongoadmin:secret@localhost:27017/bm',
     app: {
