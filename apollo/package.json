@@ -29,7 +29,7 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "start": "DEBUG=bm nodemon ./src/server.js",
+    "start": "DEBUG=bm nodemon -e js,graphql ./src/server.js",
     "start:mock": "DEBUG=bm NODE_ENV=mock nodemon ./src/server.js"
   },
   "husky": {
