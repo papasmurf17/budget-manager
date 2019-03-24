@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const { Schema } = mongoose;
+const { ObjectId } = mongoose.Schema.Types;
 
 const transactionSchema = new Schema({
   _id: ObjectId,
-  amount: Number,
+  amount: String,
   currencyCode: String,
   description: String,
   expenseType: String,

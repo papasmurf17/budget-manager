@@ -9,6 +9,6 @@ type Transaction {
 }
 
 type Query {
-    Transactions: [Transaction]
-    Transaction: Transaction
+    Transactions(limit: Int): [Transaction]
+    Transaction(id: ID!): Transaction
 }
