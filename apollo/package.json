@@ -29,7 +29,8 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "start": "DEBUG=figs nodemon ./src/server.js"
+    "start": "DEBUG=bm nodemon ./src/server.js",
+    "start:mock": "DEBUG=bm NODE_ENV=mock nodemon ./src/server.js"
   },
   "husky": {
     "hooks": {

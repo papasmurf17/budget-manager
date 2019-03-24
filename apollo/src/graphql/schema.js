@@ -1,9 +1,9 @@
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const { importSchema } = require('graphql-import');
 
 const resolvers = require('./resolvers/transaction');
 
-// import mocks from './mocks';
+const mocks = require('./mocks');
 
 const typeDefs = importSchema('./src/graphql/schema.graphql');
 
@@ -12,7 +12,7 @@ const apolloServerConfiguration = new ApolloServer({
   typeDefs,
   resolvers,
   playground: {
-    endpoint: `http://localhost:4000/graphql`,
+    endpoint: 'http://localhost:4000/graphql',
     settings: {
       'editor.theme': 'dark'
     }
