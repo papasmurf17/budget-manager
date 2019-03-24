@@ -30,5 +30,20 @@
   },
   "scripts": {
     "start": "DEBUG=figs nodemon ./src/server.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "test/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
