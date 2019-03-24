@@ -19,12 +19,15 @@ const addTransaction = transaction => new Transaction({
   reporter: transaction.reporter
 }).save();
 
+const removeTransaction = transactionId => Transaction.findOneAndDelete({ _id: transactionId });
+
 module.exports = {
   Query: {
     Transaction: (parent, { id }) => findTransaction(id),
     Transactions: (parent, { limit }) => findTransactions(limit),
   },
   Mutation: {
-    addTransaction: (parent, { transaction }) => addTransaction(transaction)
+    addTransaction: (parent, { transaction }) => addTransaction(transaction),
+    removeTransaction: (parent, { transactionId }) => removeTransaction(transactionId)
   }
 };
