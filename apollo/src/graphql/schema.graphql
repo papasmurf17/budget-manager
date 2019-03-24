@@ -1,14 +1,30 @@
+scalar Date
+
+## Input
+input Transactioninput {
+    amount: Float!,
+    currencyCode: String!,
+    description: String!,
+    expenseType: String,
+    invoiceDate: Date,
+    user: String!
+}
+
 type Transaction {
     _id: ID!,
     amount: Float,
     currencyCode: String,
     description: String,
     expenseType: String,
-    invoiceDate: String,
+    invoiceDate: Date,
     user: String
 }
 
 type Query {
     Transactions(limit: Int): [Transaction]
     Transaction(id: ID!): Transaction
+}
+
+type Mutation {
+    addTransaction(transaction: Transactioninput): Transaction
 }

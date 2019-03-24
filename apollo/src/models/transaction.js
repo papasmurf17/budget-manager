@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const { ObjectId } = mongoose.Schema.Types;
 
+// TODO: add reporter
 const transactionSchema = new Schema({
-  _id: ObjectId,
   amount: String,
   currencyCode: String,
   description: String,

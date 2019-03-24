@@ -9,10 +9,21 @@ const findTransaction = id => Transaction.findById(id)
   // .lean()
   .exec();
 
+const addTransaction = transaction => new Transaction({
+  amount: transaction.amount,
+  currencyCode: transaction.currencyCode,
+  description: transaction.description,
+  expenseType: transaction.expenseType,
+  invoiceDate: transaction.invoiceDate,
+  user: transaction.user
+}).save();
+
 module.exports = {
   Query: {
     Transaction: (parent, { id }) => findTransaction(id),
     Transactions: (parent, { limit }) => findTransactions(limit),
   },
-  // Mutation: {}
+  Mutation: {
+    addTransaction: (parent, { transaction }) => addTransaction(transaction)
+  }
 };
