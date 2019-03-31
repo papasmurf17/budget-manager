@@ -1,0 +1,39 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb"],
+  "plugins": ["react-hooks"],
+  "env": {
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "key-spacing"           : 0,
+    "jsx-quotes"            : [2, "prefer-single"],
+    "max-len"               : ["error", { "code": 120, "tabWidth": 2, "ignoreUrls": true, "ignoreRegExpLiterals": true }],
+    "semi"                  : ["error", "always", { "omitLastInOneLineBlock": true}],
+    "curly"                 : ["error", "all"],
+    "object-curly-spacing"  : [2, "always"],
+    "object-curly-newline"  : "off",
+    "comma-dangle"          : ["error", "only-multiline"],
+    "consistent-return"     : "off",
+    "arrow-parens"          : ["error", "as-needed"],
+    "react/jsx-filename-extension"      : [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies" : ["off"],
+    "function-paren-newline": [2, "consistent"],
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-for": "off",
+    "no-confusing-arrow": ["error", {"allowParens": true}],
+    "react/destructuring-assignment": ["error", "always", { "ignoreClassFields": true }],
+    "react/jsx-one-expression-per-line": ["off"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}
