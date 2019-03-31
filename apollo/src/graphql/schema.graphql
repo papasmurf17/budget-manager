@@ -30,4 +30,5 @@ type Query {
 type Mutation {
     addTransaction(transaction: Transactioninput): Transaction
     removeTransaction(transactionId: ID!): Transaction
+    updateTransaction(transactionId: ID!): Transaction
 }
