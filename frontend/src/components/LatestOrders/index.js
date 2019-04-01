@@ -12,7 +12,8 @@ export const fetchTransactions = gql`
     description,
     invoiceDate,
     user,
-    reporter
+    reporter,
+    currencyCode
   }
 }
 `;

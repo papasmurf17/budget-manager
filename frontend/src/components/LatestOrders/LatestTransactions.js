@@ -1,17 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Text from '@welld/react-components/lib/Text';
+import classnames from 'classnames';
+import distanceInWords from 'date-fns/distance_in_words';
+
+import './LatestTransactions.scss';
 
 const LatestTransactions = ({ transactions }) => (
-  <ul>
+  <ul className='list-reset list-view'>
     {
       transactions.length
         ? (
-          transactions.map(({ id, invoiceDate, description, user }) => (
-            <li key={id}>
-              <Text>{ `${description}, insert by ${user} at ${invoiceDate}` }</Text>
-              <Link to={`/transactions/${id}`}>View transaction detail</Link>
+          transactions.map(({ id, invoiceDate, description, user, reporter, amount, currencyCode }) => (
+            <li className='item padding-15' key={id}>
+              <div className='inline m-l-15'>
+                <p className='recipients no-margin hint-text small'>{reporter}</p>
+                <p className='subject no-margin'>{`${description} requested by ${user}`}</p>
+                <p className={classnames('font-bold', { 'text-success': amount > 0, 'text-danger': amount < 0 })}>
+                  {`${currencyCode} ${amount} `}
+                </p>
+              </div>
+              <div className='datetime'>{distanceInWords(new Date(), new Date(invoiceDate))}</div>
             </li>
           ))
         )
@@ -23,11 +31,7 @@ const LatestTransactions = ({ transactions }) => (
 LatestTransactions.propTypes = {
   transactions: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      creator: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired
-      }).isRequired
+      id: PropTypes.string.isRequired
     })
   )
 };
