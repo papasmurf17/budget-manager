@@ -18,7 +18,7 @@ export const fetchTransactions = gql`
 }
 `;
 
-const LatestTransactionsContainer = () => (
+const LatestTransactionsContainer = props => (
   <Query
     query={fetchTransactions}
   >
@@ -26,7 +26,7 @@ const LatestTransactionsContainer = () => (
       if (loading) { return <Text>Loading...</Text> }
       if (error) { return <Text>Error!</Text> }
 
-      return <Transactions transactions={data.Transactions} />;
+      return <Transactions transactions={data.Transactions} {...props} />;
     }}
   </Query>
 );

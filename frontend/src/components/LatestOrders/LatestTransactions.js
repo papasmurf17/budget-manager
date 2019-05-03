@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 import classnames from 'classnames';
 import distanceInWords from 'date-fns/distance_in_words';
 import Typeahead from '@welld/react-components/lib/Typeahead';
@@ -7,6 +8,8 @@ import Button from '@welld/react-components/lib/Button';
 import Icon from '@welld/react-components/lib/Icon';
 
 import './LatestTransactions.scss';
+
+import AddTransaction from '../AddTransaction';
 
 const getAsyncOptions = (input, callback) => {
   const error = null;
@@ -24,7 +27,7 @@ const getAsyncOptions = (input, callback) => {
   }, 2000);
 };
 
-const LatestTransactions = ({ transactions }) => (
+const LatestTransactions = ({ transactions, history }) => (
   <>
     <div className='flex items-end'>
       <Typeahead
@@ -39,10 +42,20 @@ const LatestTransactions = ({ transactions }) => (
         color='success'
         size='small'
         className='flex-none'
-        onClick={() => console.log('Add new transaction')}
+        onClick={() => history.push({ pathname: '/transactions/new', search: history.location.search })}
       >
         <Icon name='plus' size='small' />
       </Button>
+      <Route
+        path='/transactions/new'
+        render={
+          props => (
+            <AddTransaction
+              {...props}
+            />
+          )
+        }
+      />
     </div>
     <hr />
     <ul className='list-reset list-view'>
@@ -69,6 +82,7 @@ const LatestTransactions = ({ transactions }) => (
 );
 
 LatestTransactions.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }),
   transactions: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired
@@ -77,7 +91,8 @@ LatestTransactions.propTypes = {
 };
 
 LatestTransactions.defaultProps = {
-  transactions: []
+  transactions: [],
+  history: null,
 };
 
 export default LatestTransactions;

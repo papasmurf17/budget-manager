@@ -5,7 +5,7 @@ import LatestOrders from '../../components/LatestOrders';
 
 const Transactions = ({ match }) => (
   <Switch>
-    <Route component={LatestOrders} path={`${match.path}/`} exact />
+    <Route component={LatestOrders} path={`${match.path}/`} />
     {/* <Route component={TransactionDetail} path={`${match.path}/:transactionId`} /> */}
   </Switch>
 );
