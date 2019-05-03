@@ -26,7 +26,7 @@ const getAsyncOptions = (input, callback) => {
 
 const LatestTransactions = ({ transactions }) => (
   <>
-    <div className='flex flex-initial'>
+    <div className='flex items-end'>
       <Typeahead
         value=''
         onChange={evt => console.log(evt)}
@@ -38,7 +38,7 @@ const LatestTransactions = ({ transactions }) => (
       <Button
         color='success'
         size='small'
-        className='rounded-full h-24 w-24 flex items-center justify-center'
+        className='flex-none'
         onClick={() => console.log('Add new transaction')}
       >
         <Icon name='plus' size='small' />
