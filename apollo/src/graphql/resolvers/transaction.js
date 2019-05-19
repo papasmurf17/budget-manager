@@ -9,14 +9,14 @@ const findTransaction = id => Transaction.findById(id)
   // .lean()
   .exec();
 
-const addTransaction = transaction => new Transaction({
+const addTransaction = (transaction, reporter)=> new Transaction({
   amount: transaction.amount,
   currencyCode: transaction.currencyCode,
   description: transaction.description,
   expenseType: transaction.expenseType,
   invoiceDate: transaction.invoiceDate,
   user: transaction.user,
-  reporter: transaction.reporter
+  reporter
 }).save();
 
 const removeTransaction = transactionId => Transaction.findOneAndDelete({ _id: transactionId });
@@ -27,7 +27,8 @@ module.exports = {
     Transactions: (parent, { limit }) => findTransactions(limit),
   },
   Mutation: {
-    addTransaction: (parent, { transaction }) => addTransaction(transaction),
+    addTransaction: (parent, { transaction }, context) =>
+      addTransaction(transaction, `${context.userData.firstName} ${context.userData.lastName}`),
     removeTransaction: (parent, { transactionId }) => removeTransaction(transactionId)
   }
 };
