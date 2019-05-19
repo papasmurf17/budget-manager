@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import TextInput from '@welld/react-components/lib/TextInput';
-import DatePicker from '@welld/react-components/lib/DatePicker';
 import Button from '@welld/react-components/lib/Button';
 
-import DevConsole from '../../util/DevConsole';
+import DatePicker from '../Form/FormikDatePicker';
 
 const initialValues = {
   user: '',
@@ -96,10 +95,10 @@ const TransactionForm = ({ history, onSubmit }) => (
             name='invoiceDate'
             labelType='inside'
             label='Invoice date'
+            format='DD-MM-YYYY'
             cancellable
             className='flex-1'
-            onDateChange={evt => DevConsole('Date changed', evt)}
-            onChange={formikProps.handleChange}
+            onChange={formikProps.setFieldValue}
             onBlur={formikProps.handleBlur}
             value={formikProps.values.invoiceDate}
             required
