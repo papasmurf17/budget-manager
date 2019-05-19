@@ -9,7 +9,7 @@
     "schindler"
   ],
   "dependencies": {
-    "@welld/react-components": "^0.6.2-936295ae",
+    "@welld/react-components": "^0.6.2-a33ce5ef",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",
     "apollo-link": "^1.2.9",
