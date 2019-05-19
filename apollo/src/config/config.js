@@ -1,14 +1,12 @@
+require('dotenv').config();
+
 module.exports = {
-  development: {
-    db: 'mongodb://mongoadmin:secret@localhost:27017/bm',
-    app: {
-      name: 'bm'
-    }
+  db: {
+    host: process.env.DB_HOST
   },
-  production: {
-    db: 'mongodb://mongoadmin:secret@localhost:27017/bm',
-    app: {
-      name: 'bm'
-    }
-  }
+  app: {
+    name: 'budget-monitor'
+  },
+  port: process.env.PORT || 4000,
+  version: process.env.PROJECT_VERSION
 };
