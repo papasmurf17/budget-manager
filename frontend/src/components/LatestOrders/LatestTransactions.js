@@ -9,7 +9,8 @@ import Icon from '@welld/react-components/lib/Icon';
 
 import './LatestTransactions.scss';
 
-import AddTransaction from '../AddTransaction';
+import CreateTransaction from '../../views/CreateTransaction';
+import DevConsole from '../../util/DevConsole';
 
 const getAsyncOptions = (input, callback) => {
   const error = null;
@@ -32,7 +33,7 @@ const LatestTransactions = ({ transactions, history }) => (
     <div className='flex items-end'>
       <Typeahead
         value=''
-        onChange={evt => console.log(evt)}
+        onChange={evt => DevConsole.log(evt)}
         loadOptions={getAsyncOptions}
         label='search a transaction'
         labelHelp='you can search by: description, user, amount and reporter'
@@ -50,7 +51,7 @@ const LatestTransactions = ({ transactions, history }) => (
         path='/transactions/new'
         render={
           props => (
-            <AddTransaction
+            <CreateTransaction
               {...props}
             />
           )
