@@ -8,7 +8,6 @@ input Transactioninput {
     expenseType: String,
     invoiceDate: Date,
     user: String!
-    reporter: String!
 }
 
 type Transaction {
