@@ -17,6 +17,7 @@
     "graphql": "^14.1.1",
     "graphql-import": "^0.7.1",
     "graphql-tools": "^4.0.4",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.11"
   },
