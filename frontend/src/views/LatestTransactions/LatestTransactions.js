@@ -67,12 +67,14 @@ const LatestTransactions = ({ transactions, history }) => (
               <li className='item padding-15' key={_id}>
                 <div className='inline m-l-15'>
                   <p className='recipients no-margin hint-text small'>{reporter}</p>
-                  <p className='subject no-margin'>{`${description} requested by ${user}`}</p>
+                  <p className='subject no-margin'>{`${description}`}</p>
                   <p className={classnames('font-bold', { 'text-success': amount > 0, 'text-danger': amount < 0 })}>
                     {`${currencyCode} ${amount} `}
                   </p>
                 </div>
-                <div className='datetime'>{distanceInWords(new Date(), new Date(invoiceDate))}</div>
+                <div className='datetime'>
+                  Requested by <b>{user}</b>, {distanceInWords(new Date(), new Date(invoiceDate))}
+                </div>
               </li>
             ))
           )
