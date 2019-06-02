@@ -9,7 +9,7 @@ import Icon from '@welld/react-components/lib/Icon';
 
 import './LatestTransactions.scss';
 
-import CreateTransaction from '../../views/CreateTransaction';
+import CreateTransaction from '../CreateTransaction';
 import DevConsole from '../../util/DevConsole';
 
 const getAsyncOptions = (input, callback) => {
