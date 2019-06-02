@@ -38,3 +38,7 @@ hr {
 .wd-single-datepicker-dd {
   z-index: 9999;
 }
+
+*:focus {
+  outline: none;
+}
