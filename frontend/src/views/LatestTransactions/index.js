@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Transactions from './LatestTransactions';
 
-export const fetchTransactions = gql`
+export const FETCH_TRANSACTIONS = gql`
   query LastTransactions {
     Transactions(limit: 20) {
     _id,
@@ -20,7 +20,7 @@ export const fetchTransactions = gql`
 
 const LatestTransactionsContainer = props => (
   <Query
-    query={fetchTransactions}
+    query={FETCH_TRANSACTIONS}
   >
     {({ loading, error, data }) => {
       if (loading) { return <Text>Loading...</Text> }

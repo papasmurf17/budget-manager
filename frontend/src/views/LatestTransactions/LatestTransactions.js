@@ -63,8 +63,8 @@ const LatestTransactions = ({ transactions, history }) => (
       {
         transactions.length
           ? (
-            transactions.map(({ id, invoiceDate, description, user, reporter, amount, currencyCode }) => (
-              <li className='item padding-15' key={id}>
+            transactions.map(({ _id, invoiceDate, description, user, reporter, amount, currencyCode }) => (
+              <li className='item padding-15' key={_id}>
                 <div className='inline m-l-15'>
                   <p className='recipients no-margin hint-text small'>{reporter}</p>
                   <p className='subject no-margin'>{`${description} requested by ${user}`}</p>
@@ -86,7 +86,7 @@ LatestTransactions.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }),
   transactions: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired
+      _id: PropTypes.string.isRequired
     })
   )
 };
