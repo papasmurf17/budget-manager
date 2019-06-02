@@ -10,6 +10,7 @@ import Icon from '@welld/react-components/lib/Icon';
 import './LatestTransactions.scss';
 
 import CreateTransaction from '../CreateTransaction';
+import UpdateTransaction from '../UpdateTransaction';
 import DevConsole from '../../util/DevConsole';
 
 const getAsyncOptions = (input, callback) => {
@@ -57,14 +58,30 @@ const LatestTransactions = ({ transactions, history }) => (
           )
         }
       />
+      <Route
+        path='/transactions/edit/:transactionId'
+        render={
+          props => (
+            <UpdateTransaction
+              {...props}
+            />
+          )
+        }
+      />
     </div>
     <hr />
-    <ul className='list-reset list-view'>
+    <div className='list-reset list-view'>
       {
         transactions.length
           ? (
             transactions.map(({ _id, invoiceDate, description, user, reporter, amount, currencyCode }) => (
-              <li className='item padding-15' key={_id}>
+              <div
+                onClick={() => history.push(`/transactions/edit/${_id}`)}
+                className='item padding-15'
+                key={_id}
+                role='button'
+                tabIndex={0}
+              >
                 <div className='inline m-l-15'>
                   <p className='recipients no-margin hint-text small'>{reporter}</p>
                   <p className='subject no-margin'>{`${description}`}</p>
@@ -75,12 +92,12 @@ const LatestTransactions = ({ transactions, history }) => (
                 <div className='datetime'>
                   Requested by <b>{user}</b>, {distanceInWords(new Date(), new Date(invoiceDate))}
                 </div>
-              </li>
+              </div>
             ))
           )
           : 'There are no existing transactions'
       }
-    </ul>
+    </div>
   </>
 );
 

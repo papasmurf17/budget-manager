@@ -6,14 +6,15 @@ import Button from '@welld/react-components/lib/Button';
 
 import DatePicker from '../Form/FormikDatePicker';
 
-const initialValues = {
+const initialValues = transaction => ({
   user: '',
   description: '',
   expenseType: '',
   invoiceDate: new Date(),
   currencyCode: 'CHF',
-  amount: 0
-};
+  amount: 0,
+  ...transaction
+});
 
 const validate = values => {
   const requiredFields = [
@@ -45,9 +46,9 @@ const validate = values => {
   return errors;
 };
 
-const TransactionForm = ({ history, onSubmit }) => (
+const TransactionForm = ({ history, onSubmit, transaction }) => (
   <Formik
-    initialValues={initialValues}
+    initialValues={initialValues(transaction)}
     validate={validate}
     onSubmit={(values, actions) => {
       actions.setSubmitting(true);
@@ -158,11 +159,13 @@ const TransactionForm = ({ history, onSubmit }) => (
 
 TransactionForm.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }),
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  transaction: PropTypes.shape({})
 };
 
 TransactionForm.defaultProps = {
   history: null,
+  transaction: null,
   onSubmit: () => {}
 };
 

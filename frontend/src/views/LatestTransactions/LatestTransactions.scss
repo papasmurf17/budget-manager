@@ -1,8 +1,8 @@
-.list-view li:hover {
+.list-view div:hover {
   background-color: #daeffd;
 }
 
-li.item {
+div.item {
   position: relative;
   border-bottom: 1px solid rgba(230, 230, 230, 0.7);
   cursor: pointer;

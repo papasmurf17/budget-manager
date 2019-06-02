@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 
-import AddTransaction from '../../components/AddTransaction';
+import TransactionModal from '../../components/TransactionModal';
 import { FETCH_TRANSACTIONS } from '../LatestTransactions';
 
 const CREATE_TRANSACTION = gql`
@@ -33,7 +33,7 @@ const CreateTransaction = ({ history }) => (
     }}
   >
     {createTransaction => (
-      <AddTransaction
+      <TransactionModal
         onSubmit={({ user, description, expenseType, amount, currencyCode, invoiceDate }) => (
           createTransaction({
             variables: {
