@@ -9,14 +9,16 @@ import LoggedUser from '../LoggedUser';
 
 const App = () => (
   <div className='app h-screen flex flex-col'>
-    <div className='flex border-b border-grey-light px-10 py-4 items-center'>
-      <Heading size='h3' className='flex-1'>
-        <Text weight='bold' component='span'>Budget</Text>
-        Manager
-      </Heading>
-      <LoggedUser />
+    <div className='px-10 py-4 border-b border-grey-light fixed top-0 w-full z-50'>
+      <div className='flex items-center h-12'>
+        <Heading size='h3' className='flex-1'>
+          <Text weight='bold' component='span'>Budget</Text>
+          Manager
+        </Heading>
+        <LoggedUser />
+      </div>
     </div>
-    <div className='flex-1 p-10 page-container'>
+    <div className='flex-1 p-10 page-container mt-12'>
       <Views />
     </div>
   </div>
