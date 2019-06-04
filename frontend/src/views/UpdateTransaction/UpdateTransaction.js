@@ -4,11 +4,10 @@ import gql from 'graphql-tag';
 import { Mutation, Query } from 'react-apollo';
 
 import TransactionModal from '../../components/TransactionModal';
-import { FETCH_TRANSACTIONS } from '../LatestTransactions';
 
 const UPDATE_TRANSACTION = gql`
-  mutation CreateTransaction($transaction: Transactioninput!) {
-    addTransaction(transaction: $transaction) {
+  mutation UpdateTransaction($id: ID!, $transaction: UpdateTransactionInput!) {
+    updateTransaction(id: $id, transaction: $transaction) {
       _id
       amount,
       currencyCode
@@ -49,19 +48,14 @@ const UpdateTransaction = ({ history, match }) => (
       return (
         <Mutation
           mutation={UPDATE_TRANSACTION}
-          update={(cache, { data: { addTransaction } }) => {
-            const { Transactions } = cache.readQuery({ query: FETCH_TRANSACTIONS });
-            cache.writeQuery({
-              query: FETCH_TRANSACTIONS,
-              data: { Transactions: Transactions.concat([addTransaction]) }
-            });
-          }}
+          key={match.params.transactionId}
         >
-          {createTransaction => (
+          {updateTransaction => (
             <TransactionModal
               onSubmit={({ user, description, expenseType, amount, currencyCode, invoiceDate }) => (
-                createTransaction({
+                updateTransaction({
                   variables: {
+                    id: match.params.transactionId,
                     transaction: {
                       user,
                       description,
