@@ -7,7 +7,7 @@ import TransactionModal from '../../components/TransactionModal';
 import { FETCH_TRANSACTIONS } from '../LatestTransactions';
 
 const CREATE_TRANSACTION = gql`
-  mutation CreateTransaction($transaction: Transactioninput!) {
+  mutation CreateTransaction($transaction: TransactionInput!) {
     addTransaction(transaction: $transaction) {
       _id
       amount,
