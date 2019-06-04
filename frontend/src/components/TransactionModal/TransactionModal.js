@@ -5,7 +5,11 @@ import Modal from '@welld/react-components/lib/ModalDialog';
 import TransactionForm from '../TransactionForm';
 
 const TransactionModal = ({ history, onSubmit, transaction }) => (
-  <Modal open defaultCloseButton={false}>
+  <Modal
+    open
+    defaultCloseButton={false}
+    onRequestClose={() => history.push({ pathname: '/transactions', search: history.location.search })}
+  >
     <Modal.Header>
       <h2>Insert <span className='semi-bold'>Transaction</span></h2>
       <p>Event, conference, travel, book, course or other...</p>
