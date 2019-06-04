@@ -7,14 +7,14 @@ import Button from '@welld/react-components/lib/Button';
 import DatePicker from '../Form/FormikDatePicker';
 import FormikSelect from '../Form/FormikSelect';
 
-const initialValues = ({ amount, ...transaction }) => ({
+const initialValues = transaction => ({
   user: '',
   description: '',
   expenseType: '',
   invoiceDate: new Date(),
   currencyCode: 'CHF',
-  amount: amount ? Math.abs(amount) : 0,
-  transactionType: amount && amount > 0 ? 'Deposit' : 'Payment',
+  amount: transaction && transaction.amount ? Math.abs(transaction.amount) : 0,
+  transactionType: transaction && transaction.amount > 0 ? 'Deposit' : 'Payment',
   ...transaction
 });
 
