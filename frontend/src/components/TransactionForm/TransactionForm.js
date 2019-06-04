@@ -5,14 +5,16 @@ import TextInput from '@welld/react-components/lib/TextInput';
 import Button from '@welld/react-components/lib/Button';
 
 import DatePicker from '../Form/FormikDatePicker';
+import FormikSelect from '../Form/FormikSelect';
 
-const initialValues = transaction => ({
+const initialValues = ({ amount, ...transaction }) => ({
   user: '',
   description: '',
   expenseType: '',
   invoiceDate: new Date(),
   currencyCode: 'CHF',
-  amount: 0,
+  amount: amount ? Math.abs(amount) : 0,
+  transactionType: amount && amount > 0 ? 'Deposit' : 'Payment',
   ...transaction
 });
 
@@ -52,7 +54,11 @@ const TransactionForm = ({ history, onSubmit, transaction }) => (
     validate={validate}
     onSubmit={(values, actions) => {
       actions.setSubmitting(true);
-      onSubmit(values)
+      const updatedValues = {
+        ...values,
+        amount: values.transactionType === 'Deposit' ? Math.abs(values.amount) : -Math.abs(values.amount)
+      };
+      onSubmit(updatedValues)
         .finally(() => actions.setSubmitting(false));
     }}
     render={formikProps => (
@@ -105,6 +111,21 @@ const TransactionForm = ({ history, onSubmit, transaction }) => (
           />
         </div>
         <div className='mt-5 flex'>
+          <FormikSelect
+            name='transactionType'
+            labelType='inside'
+            label='Transaction Type'
+            placeholder='Payment'
+            className='flex-basis-6 mr-5'
+            onBlur={formikProps.handleBlur}
+            value={formikProps.values.transactionType}
+            options={[
+              { value: 'Payment', label: 'Payment' },
+              { value: 'Deposit', label: 'Deposit' },
+            ]}
+            setFieldValue={formikProps.setFieldValue}
+            required
+          />
           <TextInput
             name='amount'
             labelType='inside'
@@ -117,15 +138,21 @@ const TransactionForm = ({ history, onSubmit, transaction }) => (
             value={formikProps.values.amount}
             required
           />
-          <TextInput
+          <FormikSelect
             name='currencyCode'
             labelType='inside'
             label='Currency'
             placeholder='CHF'
             className='flex-basis-12'
-            onChange={formikProps.handleChange}
             onBlur={formikProps.handleBlur}
             value={formikProps.values.currencyCode}
+            options={[
+              { value: 'CHF', label: 'CHF' },
+              { value: 'EUR', label: 'EUR' },
+              { value: 'USD', label: 'USD' },
+              { value: 'GBP ', label: 'GBP' },
+            ]}
+            setFieldValue={formikProps.setFieldValue}
             required
           />
         </div>

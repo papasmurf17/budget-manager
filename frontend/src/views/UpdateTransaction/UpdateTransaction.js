@@ -6,7 +6,7 @@ import { Mutation, Query } from 'react-apollo';
 import TransactionModal from '../../components/TransactionModal';
 import { FETCH_TRANSACTIONS } from '../LatestTransactions';
 
-const CREATE_TRANSACTION = gql`
+const UPDATE_TRANSACTION = gql`
   mutation CreateTransaction($transaction: Transactioninput!) {
     addTransaction(transaction: $transaction) {
       _id
@@ -48,7 +48,7 @@ const UpdateTransaction = ({ history, match }) => (
       const { Transaction } = data;
       return (
         <Mutation
-          mutation={CREATE_TRANSACTION}
+          mutation={UPDATE_TRANSACTION}
           update={(cache, { data: { addTransaction } }) => {
             const { Transactions } = cache.readQuery({ query: FETCH_TRANSACTIONS });
             cache.writeQuery({
