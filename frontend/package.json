@@ -1,13 +1,16 @@
 {
-  "name": "@schindler/figs",
+  "name": "budget-manager",
   "version": "0.10.0",
-  "description": "A webapp to configure and manage fixture orders for elevator installations.",
+  "description": "A webapp to track all income and expenses",
   "private": false,
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "MIT",
   "keywords": [
-    "fixture",
-    "schindler"
+    "budget manager",
+    "budget"
   ],
+  "engines": {
+    "node": "10.x"
+  },
   "dependencies": {
     "@welld/react-components": "^0.6.2-a33ce5ef",
     "apollo-cache-inmemory": "^1.5.1",
@@ -39,11 +42,7 @@
   "bugs": {
     "url": "https://gitlab.welld.io/schindler/figs/ui/issues"
   },
-  "author": "Simone D'Avico <simone.davico@welld.ch>",
-  "contributors": [
-    "Matteo Codogno <matteo.codogno@welld.ch>",
-    "Andrea Aquino <andrea.aquino@welld.ch>"
-  ],
+  "author": "Matteo Codogno <matteo.codogno@welld.ch>",
   "files": [
     "build/"
   ],
