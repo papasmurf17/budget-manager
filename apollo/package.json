@@ -2,11 +2,14 @@
   "name": "bm-apollo",
   "version": "1.0.0",
   "description": "GraphQL API to retrieve data from mongodb",
-  "main": "server.js",
+  "main": "src/server.js",
   "repository": "https://github.com/papasmurf17/budget-manager.git",
-  "author": "Matteo Codogno",
+  "author": "Matteo Codogno <matteo.codogno.90@gmail.ch>",
   "license": "MIT",
   "private": false,
+  "files": [
+    "src"
+  ],
   "dependencies": {
     "apollo-server": "^2.4.0",
     "apollo-server-express": "^2.4.0",
@@ -32,7 +35,8 @@
   },
   "scripts": {
     "start": "DEBUG=bm nodemon -e js,graphql ./src/server.js",
-    "start:mock": "DEBUG=bm NODE_ENV=mock nodemon ./src/server.js"
+    "start:mock": "DEBUG=bm NODE_ENV=mock nodemon ./src/server.js",
+    "build": "yarn pack"
   },
   "husky": {
     "hooks": {
