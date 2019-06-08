@@ -3,12 +3,10 @@ const proxy = require('http-proxy-middleware');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-console.log('env', PORT);
+const PORT = process.env.APP_PORT || 5000;
 
 // Proxy api request
-// Optional, if you don't want your add CORS support to your Django app
+// Optional, if you don't want your add CORS support to your NodeJS app
 app.use(
   '/graphql',
   proxy({

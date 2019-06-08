@@ -1,1 +1,1 @@
-bm_fe: yarn start
+bm_fe: npm run start:prod
