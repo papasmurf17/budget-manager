@@ -22,6 +22,7 @@
     "apollo-link-state": "^0.4.2",
     "classnames": "^2.2.6",
     "date-fns": "^1.30.1",
+    "dotenv": "^8.0.0",
     "formik": "^1.5.7",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
@@ -52,6 +53,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build && yarn pack",
+    "heroku-postbuild": "npm run build",
     "test": "cross-env CI=true craco test --no-cache",
     "test:watch": "craco test \"^(?!.*e2e\\.spec\\.js$).*\\.spec\\.js$\" --no-cache",
     "test:unit": "yarn test \"^(?!.*e2e\\.spec\\.js$).*\\.spec\\.js$\"",
