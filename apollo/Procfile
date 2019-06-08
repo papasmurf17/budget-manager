@@ -1,1 +1,1 @@
-bm_be: npm start:prod
+bm_be: npm run start:prod

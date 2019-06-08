@@ -7,6 +7,6 @@ module.exports = {
   app: {
     name: 'budget-monitor'
   },
-  port: process.env.PORT || 4000,
+  port: process.env.APP_PORT || 4000,
   version: process.env.PROJECT_VERSION
 };

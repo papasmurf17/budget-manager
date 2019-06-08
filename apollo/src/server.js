@@ -11,7 +11,7 @@ apolloServerConfiguration.applyMiddleware({
   app: graphQLServer
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.APP_PORT || 4000;
 
 graphQLServer.listen(PORT, () => {
   debug(`🚀 The server has started on port: ${PORT}`);
