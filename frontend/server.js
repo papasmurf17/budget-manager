@@ -3,27 +3,23 @@ const proxy = require('http-proxy-middleware');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.APP_PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 // Proxy api request
-// Optional, if you don't want your add CORS support to your NodeJS app
-app.use(
-  '/graphql',
-  proxy({
-    target: process.env.API_ROOT_URL,
-    changeOrigin: true,
-    ws: true,
-    pathRewrite: {
-      '^/graphql': '',
-    },
+app
+  .use(
+    '/graphql',
+    proxy({
+      target: process.env.REACT_APP_API_ENDPOINT,
+      changeOrigin: true,
+      ws: true,
+      pathRewrite: {
+        '^/graphql': '',
+      },
+    })
+  )
+  .use(express.static(path.join(__dirname, 'build')))
+  .get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   })
-);
-
-app.use(express.static(path.join(__dirname, 'build')));
-
-// https://facebook.github.io/create-react-app/docs/deployment#serving-apps-with-client-side-routing
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-app.listen(PORT, () => console.log(`Listening on :${PORT}`));
+  .listen(PORT, () => console.log(`🎧 Listening on :${PORT} 🚀`));
