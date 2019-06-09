@@ -4,7 +4,8 @@ import gql from 'graphql-tag';
 import apolloClient from './apollo';
 
 const appBasename = process.env.PUBLIC_PATH || '';
-const keycloakClient = Keycloak(`${appBasename}/keycloak.json`);
+const keycloakConfig = `${appBasename}/keycloak.json`;
+const keycloakClient = Keycloak(keycloakConfig);
 
 export const SessionContext = createContext();
 
