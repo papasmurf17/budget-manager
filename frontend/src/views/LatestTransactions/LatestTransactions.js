@@ -90,7 +90,8 @@ const LatestTransactions = ({ transactions, history }) => (
                   </p>
                 </div>
                 <div className='datetime'>
-                  Requested by <b>{user}</b>, {distanceInWords(new Date(), new Date(invoiceDate))}
+                  {amount < 0 ? 'Requested' : 'Provided' } by <b>{user}</b>,
+                  {distanceInWords(new Date(), new Date(invoiceDate))}
                 </div>
               </div>
             ))
