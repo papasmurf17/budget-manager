@@ -1,0 +1,64 @@
+language: node_js
+node_js: '10'
+
+cache:
+  directories:
+    - frontend/node_modules
+    - apollo/node_modules
+
+stages:
+  - install
+  - test
+  - analysis
+  - build
+  - publish
+#  - deploy
+#- name: deploy
+#  if: branch = master
+
+jobs:
+  include:
+    - stage: install
+      env: PROJECT=frontend/
+      name: Install frontend
+      script: cd $PROJECT && yarn install
+    - script: cd $PROJECT && yarn install
+      env: PROJECT=apollo/
+      name: Install apollo
+    - stage: test
+      script: cd $PROJECT && yarn global add eslint && yarn install && yarn lint:all
+      env: PROJECT=frontend/
+      name: FE Linting
+    - script: cd $PROJECT && yarn global add eslint && yarn install && yarn lint:all
+      env: PROJECT=apollo/
+      name: BE Linting
+    - script: cd $PROJECT && yarn install && yarn test:unit
+      env: PROJECT=frontend/
+      name: Unit Test
+  #  - script: cd $PROJECT \ && echo "USERNAME=${KC_TEST_USERNAME}" >> .env \ && echo
+  #      "PASSWORD=${KC_TEST_PASSWORD}" >> .env \ && yarn install && yarn test:e2e
+  #    env: PROJECT=frontend/
+  #    name: E2E Test
+    - stage: build
+      env: PROJECT=frontend/
+      name: FE Build
+      script: cd $PROJECT && yarn install && yarn build
+    - stage: deploy
+      name: Deploy Frontent
+      provider: heroku
+      strategy: git
+      script: echo "Deployed!"
+      on:
+        repo: papasmurf17/budget-manager
+      app: sheltered-atoll-38057
+      api_key:
+        secure: tJW86g1qwm7xNJnVaho9y2OOPYczOQ0uXi2FyXLHIDl2tHIIZAaMXk8u0F3zXHNWCUxqA2PyNOoxtpOXCA7m+h5d7+NOJ7sSCk9NFBoQk/Z4vJscaYFVfi4JBRe3MhrAiTlXf9QPQLTh+M5W+i/FyAfW5HL8lwyl3aEYLQUIYwu8Q8sr8tr/uCKEHP1imv7H0fj7PqnSkAUNCn+wS2mRUMjfi4whGFL5nt/tA+av7Qm+3bSeffSq7jRmaOYB14VOVHVE8ZT5yRijGzGd0NyZBKGX8VNFcZxkAa5hJHeeGVfsaZSVAXIKSE6ZIZVioZaz+wDLBA6OtDNpnlpncxxFV2whG4FenZrLj+Bju4AcOdJXt9fjos92fpTqmq/PoEN0amvVps2/gN4WycFUc9rqHqPuj6aG+/9qAk67fPcK4gfWyMVMd+6RKanUcjjdMJEribToP/445WhnMjJZbQrmmRk/I+7ZKs2QZMn+GNY4pzOqz7x8OKV45lDVCZur0qsBgLMTPsr9Auz/qqrJcoalSBB8ScoIGWp3bNuMUauOHsQV1AZPVD8YKU6iDkymXpaRaBwoVm196vczDiRyEAvStOShBwDIF7daltJjvCc2midoFkqO+pAGp93QD01S1xApswh2SoPHpxOvYOhqAjng50BqUbbpvcmJo0souNdhjjY=
+    - provider: heroku
+      strategy: git
+      script: echo "Deployed!"
+      on:
+        repo: papasmurf17/budget-manager
+      name: Deploy Apollo
+      app: serene-plateau-27916
+      api_key:
+        secure: tJW86g1qwm7xNJnVaho9y2OOPYczOQ0uXi2FyXLHIDl2tHIIZAaMXk8u0F3zXHNWCUxqA2PyNOoxtpOXCA7m+h5d7+NOJ7sSCk9NFBoQk/Z4vJscaYFVfi4JBRe3MhrAiTlXf9QPQLTh+M5W+i/FyAfW5HL8lwyl3aEYLQUIYwu8Q8sr8tr/uCKEHP1imv7H0fj7PqnSkAUNCn+wS2mRUMjfi4whGFL5nt/tA+av7Qm+3bSeffSq7jRmaOYB14VOVHVE8ZT5yRijGzGd0NyZBKGX8VNFcZxkAa5hJHeeGVfsaZSVAXIKSE6ZIZVioZaz+wDLBA6OtDNpnlpncxxFV2whG4FenZrLj+Bju4AcOdJXt9fjos92fpTqmq/PoEN0amvVps2/gN4WycFUc9rqHqPuj6aG+/9qAk67fPcK4gfWyMVMd+6RKanUcjjdMJEribToP/445WhnMjJZbQrmmRk/I+7ZKs2QZMn+GNY4pzOqz7x8OKV45lDVCZur0qsBgLMTPsr9Auz/qqrJcoalSBB8ScoIGWp3bNuMUauOHsQV1AZPVD8YKU6iDkymXpaRaBwoVm196vczDiRyEAvStOShBwDIF7daltJjvCc2midoFkqO+pAGp93QD01S1xApswh2SoPHpxOvYOhqAjng50BqUbbpvcmJo0souNdhjjY=

@@ -41,6 +41,9 @@
     "start:prod": "DEBUG=bm node ./src/server.js",
     "start:dev": "DEBUG=bm nodemon -e js,graphql ./src/server.js",
     "start:mock": "DEBUG=bm NODE_ENV=mock nodemon ./src/server.js",
+    "test:unit": "echo 'No unit tests'",
+    "test:e2e": "echo 'No e2e tests'",
+    "lint:all": "eslint src",
     "build": "yarn pack"
   },
   "husky": {
