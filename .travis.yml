@@ -6,16 +6,6 @@ cache:
     - frontend/node_modules
     - apollo/node_modules
 
-stages:
-  - install
-  - test
-  - analysis
-  - build
-  - publish
-#  - deploy
-#- name: deploy
-#  if: branch = master
-
 jobs:
   include:
     - stage: install
@@ -44,6 +34,7 @@ jobs:
       name: FE Build
       script: cd $PROJECT && yarn install && yarn build
     - stage: deploy
+      if: branch = master
       name: Deploy Frontent
       provider: heroku
       strategy: git
@@ -54,6 +45,7 @@ jobs:
       api_key:
         secure: tJW86g1qwm7xNJnVaho9y2OOPYczOQ0uXi2FyXLHIDl2tHIIZAaMXk8u0F3zXHNWCUxqA2PyNOoxtpOXCA7m+h5d7+NOJ7sSCk9NFBoQk/Z4vJscaYFVfi4JBRe3MhrAiTlXf9QPQLTh+M5W+i/FyAfW5HL8lwyl3aEYLQUIYwu8Q8sr8tr/uCKEHP1imv7H0fj7PqnSkAUNCn+wS2mRUMjfi4whGFL5nt/tA+av7Qm+3bSeffSq7jRmaOYB14VOVHVE8ZT5yRijGzGd0NyZBKGX8VNFcZxkAa5hJHeeGVfsaZSVAXIKSE6ZIZVioZaz+wDLBA6OtDNpnlpncxxFV2whG4FenZrLj+Bju4AcOdJXt9fjos92fpTqmq/PoEN0amvVps2/gN4WycFUc9rqHqPuj6aG+/9qAk67fPcK4gfWyMVMd+6RKanUcjjdMJEribToP/445WhnMjJZbQrmmRk/I+7ZKs2QZMn+GNY4pzOqz7x8OKV45lDVCZur0qsBgLMTPsr9Auz/qqrJcoalSBB8ScoIGWp3bNuMUauOHsQV1AZPVD8YKU6iDkymXpaRaBwoVm196vczDiRyEAvStOShBwDIF7daltJjvCc2midoFkqO+pAGp93QD01S1xApswh2SoPHpxOvYOhqAjng50BqUbbpvcmJo0souNdhjjY=
     - provider: heroku
+      if: branch = master
       strategy: git
       script: echo "Deployed!"
       on:
