@@ -1,0 +1,35 @@
+language: node_js
+node_js: '10'
+
+cache:
+  directories:
+    - frontend/node_modules
+    - apollo/node_modules
+
+jobs:
+  include:
+    - stage: install
+      env: PROJECT=frontend/
+      name: Install frontend
+      script: cd $PROJECT && yarn install
+    - script: cd $PROJECT && yarn install
+      env: PROJECT=apollo/
+      name: Install apollo
+    - stage: test
+      script: cd $PROJECT && yarn global add eslint && yarn install && yarn lint:all
+      env: PROJECT=frontend/
+      name: FE Linting
+    - script: cd $PROJECT && yarn global add eslint && yarn install && yarn lint:all
+      env: PROJECT=apollo/
+      name: BE Linting
+    - script: cd $PROJECT && yarn install && yarn test:unit
+      env: PROJECT=frontend/
+      name: Unit Test
+  #  - script: cd $PROJECT \ && echo "USERNAME=${KC_TEST_USERNAME}" >> .env \ && echo
+  #      "PASSWORD=${KC_TEST_PASSWORD}" >> .env \ && yarn install && yarn test:e2e
+  #    env: PROJECT=frontend/
+  #    name: E2E Test
+    - stage: build
+      env: PROJECT=frontend/
+      name: FE Build
+      script: cd $PROJECT && yarn install && yarn build
