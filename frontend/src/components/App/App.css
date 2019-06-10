@@ -1,3 +1,7 @@
+.app > div:last-child {
+  background: #f5f5f5;
+}
+
 .app > div:first-child {
   background: #f5f5f5;
 }

@@ -7,7 +7,7 @@ import Typeahead from '@welld/react-components/lib/Typeahead';
 import Button from '@welld/react-components/lib/Button';
 import Icon from '@welld/react-components/lib/Icon';
 
-import './LatestTransactions.scss';
+import './LatestTransactions.css';
 
 import CreateTransaction from '../CreateTransaction';
 import UpdateTransaction from '../UpdateTransaction';
@@ -70,20 +70,20 @@ const LatestTransactions = ({ transactions, history }) => (
       />
     </div>
     <hr />
-    <div className='list-reset list-view'>
+    <div className='list-view'>
       {
         transactions.length
           ? (
             transactions.map(({ _id, invoiceDate, description, user, reporter, amount, currencyCode }) => (
               <div
                 onClick={() => history.push(`/transactions/edit/${_id}`)}
-                className='item padding-15'
+                className='item padding-15 flex'
                 key={_id}
                 role='button'
                 tabIndex={0}
               >
-                <div className='inline m-l-15'>
-                  <p className='recipients no-margin hint-text small'>{reporter}</p>
+                <div className='flex-1 m-l-15'>
+                  <p className='recipients no-margin hint-text text-base'>{reporter}</p>
                   <p className='subject no-margin'>{`${description}`}</p>
                   <p className={classnames('font-bold', { 'text-success': amount > 0, 'text-danger': amount < 0 })}>
                     {`${currencyCode} ${amount} `}

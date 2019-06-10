@@ -11,7 +11,7 @@ const TransactionModal = ({ history, onSubmit, transaction }) => (
     onRequestClose={() => history.push({ pathname: '/transactions', search: history.location.search })}
   >
     <Modal.Header>
-      <h2>Insert <span className='semi-bold'>Transaction</span></h2>
+      <h2 className='text-4xl'>Insert <span className='semi-bold'>Transaction</span></h2>
       <p>Event, conference, travel, book, course or other...</p>
     </Modal.Header>
     <div className='flex flex-col'>
