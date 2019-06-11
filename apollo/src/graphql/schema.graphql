@@ -35,6 +35,7 @@ type Transaction {
 type Query {
     Transactions(limit: Int): [Transaction]
     Transaction(id: ID!): Transaction
+    Total(startFrom: Date): Float
 }
 
 ## Mutation

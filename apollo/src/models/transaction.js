@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-const { Schema, Number } = mongoose;
+const { Schema } = mongoose;
 
-// TODO: add reporter
 const transactionSchema = new Schema({
-  amount: Number,
+  amount: mongoose.Types.Decimal128,
   currencyCode: String,
   description: String,
   expenseType: String,

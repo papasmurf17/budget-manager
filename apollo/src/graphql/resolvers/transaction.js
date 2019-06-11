@@ -1,4 +1,7 @@
+const mongoose = require('mongoose');
+
 const Transaction = require('../../models/transaction');
+const ScalarType = require('./resolverMap');
 
 const findTransactions = (limit = 0) => Transaction.find({})
   .sort({ invoiceDate: 'descending' })
@@ -9,8 +12,20 @@ const findTransaction = transactionId => Transaction.findById(transactionId)
   // .lean()
   .exec();
 
+const amountFrom = async (startFrom = new Date()) => {
+  const res = await Transaction
+    .find({ invoiceDate: { $gte: startFrom } })
+    .lean()
+    .exec();
+
+  return res
+    .map(transaction => parseFloat(transaction.amount))
+    .reduce((a, b) => a + b, 0)
+    .toFixed(2);
+};
+
 const addTransaction = (transaction, reporter) => new Transaction({
-  amount: transaction.amount,
+  amount: mongoose.Types.Decimal128(transaction.amount),
   currencyCode: transaction.currencyCode,
   description: transaction.description,
   expenseType: transaction.expenseType,
@@ -24,7 +39,7 @@ const removeTransaction = transactionId => Transaction.findOneAndDelete({ _id: t
 const updateTransaction = (transactionId, transaction) => Transaction.findOneAndUpdate({
   _id: transactionId
 }, {
-  amount: transaction.amount,
+  amount: mongoose.Types.Decimal128(transaction.amount),
   currencyCode: transaction.currencyCode,
   description: transaction.description,
   expenseType: transaction.expenseType,
@@ -36,9 +51,11 @@ const updateTransaction = (transactionId, transaction) => Transaction.findOneAnd
 });
 
 module.exports = {
+  Date: ScalarType.Date,
   Query: {
     Transaction: (parent, { id }) => findTransaction(id),
     Transactions: (parent, { limit }) => findTransactions(limit),
+    Total: async (parent, { startFrom }) => amountFrom(startFrom),
   },
   Mutation: {
     addTransaction: (parent, { transaction }, context) => addTransaction(
