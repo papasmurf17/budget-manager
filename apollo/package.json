@@ -25,7 +25,7 @@
     "graphql-tools": "^4.0.4",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
-    "mongoose": "^5.4.11"
+    "mongoose": "^5.5.14"
   },
   "devDependencies": {
     "eslint": "^5.15.3",
