@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
+const { Schema, Number } = mongoose;
 
 const transactionSchema = new Schema({
-  amount: mongoose.Types.Decimal128,
+  amount: Number,
   currencyCode: String,
   description: String,
   expenseType: String,

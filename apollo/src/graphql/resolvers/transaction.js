@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 const Transaction = require('../../models/transaction');
 const ScalarType = require('./resolverMap');
 
@@ -25,7 +23,7 @@ const amountFrom = async (startFrom = new Date()) => {
 };
 
 const addTransaction = (transaction, reporter) => new Transaction({
-  amount: mongoose.Types.Decimal128(transaction.amount),
+  amount: transaction.amount,
   currencyCode: transaction.currencyCode,
   description: transaction.description,
   expenseType: transaction.expenseType,
@@ -39,7 +37,7 @@ const removeTransaction = transactionId => Transaction.findOneAndDelete({ _id: t
 const updateTransaction = (transactionId, transaction) => Transaction.findOneAndUpdate({
   _id: transactionId
 }, {
-  amount: mongoose.Types.Decimal128(transaction.amount),
+  amount: transaction.amount,
   currencyCode: transaction.currencyCode,
   description: transaction.description,
   expenseType: transaction.expenseType,
