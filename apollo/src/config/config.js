@@ -2,7 +2,8 @@ require('dotenv').config();
 
 module.exports = {
   db: {
-    host: process.env.DB_HOST
+    host: `${process.env.DB_HOST}${process.env.DB_NAME}`,
+    name: process.env.DB_NAME
   },
   app: {
     name: 'budget-monitor'
