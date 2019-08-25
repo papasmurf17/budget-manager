@@ -33,6 +33,7 @@ type Transaction {
 
 ## Query
 type Query {
+    DefaultCurrency: String
     Transactions(limit: Int): [Transaction]
     Transaction(id: ID!): Transaction
     Total(startFrom: Date): Float

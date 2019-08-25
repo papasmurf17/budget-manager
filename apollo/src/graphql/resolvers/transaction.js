@@ -1,5 +1,6 @@
 const Transaction = require('../../models/transaction');
 const ScalarType = require('./resolverMap');
+const config = require('../../config/config');
 
 const findTransactions = (limit = 0) => Transaction.find({})
   .sort({ invoiceDate: 'descending' })
@@ -9,6 +10,8 @@ const findTransactions = (limit = 0) => Transaction.find({})
 const findTransaction = transactionId => Transaction.findById(transactionId)
   // .lean()
   .exec();
+
+const defaultCurrency = () => config.currency;
 
 const amountFrom = async (startFrom = new Date()) => {
   const res = await Transaction
@@ -51,6 +54,7 @@ const updateTransaction = (transactionId, transaction) => Transaction.findOneAnd
 module.exports = {
   Date: ScalarType.Date,
   Query: {
+    DefaultCurrency: () => defaultCurrency(),
     Transaction: (parent, { id }) => findTransaction(id),
     Transactions: (parent, { limit }) => findTransactions(limit),
     Total: async (parent, { startFrom }) => amountFrom(startFrom),
