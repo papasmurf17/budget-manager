@@ -19,7 +19,8 @@ exports.up = next => {
       .forEach(transaction => {
         if (!transaction) { return next('All transactions have prices fields') }
         const { amount, currencyCode } = transaction;
-        transaction.prices = [{ currency: currencyCode, value: amount }];
+        transaction.pricePaid = { currency: currencyCode, value: amount };
+        transaction.priceConverted = {};
         db.collection('transactions').save(transaction);
       }))
     .then(() => {
