@@ -1,6 +1,7 @@
 const Transaction = require('../../models/transaction');
 const ScalarType = require('./resolverMap');
 const config = require('../../config/config');
+const currencyConverter = require('../../util/currencyConverter');
 
 const findTransactions = (limit = 0) => Transaction.find({})
   .sort({ invoiceDate: 'descending' })
@@ -25,31 +26,44 @@ const amountFrom = async (startFrom = new Date()) => {
     .toFixed(2);
 };
 
-const addTransaction = (transaction, reporter) => new Transaction({
-  amount: transaction.amount,
-  currencyCode: transaction.currencyCode,
-  description: transaction.description,
-  expenseType: transaction.expenseType,
-  invoiceDate: transaction.invoiceDate,
-  user: transaction.user,
-  reporter
-}).save();
+const addTransaction = async (transaction, reporter) => {
+  const priceConverted = await currencyConverter(transaction.amount, transaction.currencyCode, transaction.invoiceDate);
+
+  return new Transaction({
+    pricePaid: {
+      value: transaction.amount,
+      currency: transaction.currencyCode
+    },
+    priceConverted,
+    description: transaction.description,
+    expenseType: transaction.expenseType,
+    invoiceDate: transaction.invoiceDate,
+    user: transaction.user,
+    reporter
+  }).save();
+};
 
 const removeTransaction = transactionId => Transaction.findOneAndDelete({ _id: transactionId });
 
-const updateTransaction = (transactionId, transaction) => Transaction.findOneAndUpdate({
-  _id: transactionId
-}, {
-  amount: transaction.amount,
-  currencyCode: transaction.currencyCode,
-  description: transaction.description,
-  expenseType: transaction.expenseType,
-  invoiceDate: transaction.invoiceDate,
-  user: transaction.user,
-}, {
-  new: true,
-  omitUndefined: true
-});
+const updateTransaction = async (transactionId, transaction) => {
+  const priceConverted = await currencyConverter(transaction.amount, transaction.currencyCode, transaction.invoiceDate);
+  return Transaction.findOneAndUpdate({
+    _id: transactionId
+  }, {
+    pricePaid: {
+      value: transaction.amount,
+      currency: transaction.currencyCode
+    },
+    priceConverted,
+    description: transaction.description,
+    expenseType: transaction.expenseType,
+    invoiceDate: transaction.invoiceDate,
+    user: transaction.user,
+  }, {
+    new: true,
+    omitUndefined: true
+  });
+};
 
 module.exports = {
   Date: ScalarType.Date,

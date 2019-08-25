@@ -20,8 +20,15 @@ input UpdateTransactionInput {
 }
 
 ## Type
+type Price {
+    value: Float,
+    currency: String
+}
+
 type Transaction {
     _id: ID!,
+    pricePaid: Price,
+    priceConverted: Price,
     amount: Float,
     currencyCode: String,
     description: String,
