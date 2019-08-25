@@ -8,6 +8,7 @@ module.exports = {
   app: {
     name: 'budget-monitor'
   },
+  currency: process.env.DEFAULT_CURRENCY || 'CHF',
   port: process.env.APP_PORT || 4000,
   version: process.env.PROJECT_VERSION
 };
