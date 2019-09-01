@@ -9,7 +9,15 @@ const UPDATE_TRANSACTION = gql`
   mutation UpdateTransaction($id: ID!, $transaction: UpdateTransactionInput!) {
     updateTransaction(id: $id, transaction: $transaction) {
       _id
-      amount,
+      pricePaid {
+          value,
+          currency
+      }
+      priceConverted {
+          value
+          currency
+      }
+      amount
       currencyCode
       description
       expenseType

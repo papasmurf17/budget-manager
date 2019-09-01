@@ -10,8 +10,16 @@ const CREATE_TRANSACTION = gql`
   mutation CreateTransaction($transaction: TransactionInput!) {
     addTransaction(transaction: $transaction) {
       _id
-      amount,
+      amount
       currencyCode
+      pricePaid {
+          value,
+          currency
+      }
+      priceConverted {
+          value
+          currency
+      }
       description
       expenseType
       invoiceDate
