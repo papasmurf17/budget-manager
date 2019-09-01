@@ -74,7 +74,7 @@ const LatestTransactions = ({ transactions, history }) => (
       {
         transactions.length
           ? (
-            transactions.map(({ _id, invoiceDate, description, user, reporter, amount, currencyCode }) => (
+            transactions.map(({ _id, invoiceDate, description, user, reporter, pricePaid }) => (
               <div
                 onClick={() => history.push(`/transactions/edit/${_id}`)}
                 className='item padding-15 flex'
@@ -85,12 +85,18 @@ const LatestTransactions = ({ transactions, history }) => (
                 <div className='flex-1 m-l-15'>
                   <p className='recipients no-margin hint-text text-base'>{reporter}</p>
                   <p className='subject no-margin'>{`${description}`}</p>
-                  <p className={classnames('font-bold', { 'text-success': amount > 0, 'text-danger': amount < 0 })}>
-                    {`${currencyCode} ${amount} `}
+                  <p
+                    className={
+                      classnames('font-bold', {
+                        'text-success': pricePaid.value > 0, 'text-danger': pricePaid.value < 0
+                      })
+                    }
+                  >
+                    {`${pricePaid.value} ${pricePaid.currency} `}
                   </p>
                 </div>
                 <div className='datetime'>
-                  {amount < 0 ? 'Requested' : 'Provided' } by <b>{user}</b>,
+                  {pricePaid.value < 0 ? 'Requested' : 'Provided' } by <b>{user}</b>,
                   {distanceInWords(new Date(), new Date(invoiceDate))}
                 </div>
               </div>

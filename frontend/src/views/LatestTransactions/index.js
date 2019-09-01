@@ -8,12 +8,18 @@ export const FETCH_TRANSACTIONS = gql`
   query LastTransactions {
     Transactions(limit: 20) {
     _id,
-    amount,
+    pricePaid {
+        value,
+        currency
+    },
+    priceConverted {
+        value,
+        currency
+    },
     description,
     invoiceDate,
     user,
-    reporter,
-    currencyCode
+    reporter
   }
 }
 `;
