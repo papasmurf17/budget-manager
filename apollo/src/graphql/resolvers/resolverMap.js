@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const { GraphQLScalarType } = require('graphql');
 // const { Kind } = require('graphql/language');
 
@@ -18,4 +19,14 @@ module.exports = {
       return new Date(ast.value);
     },
   }),
+  // Transaction: transaction => Object.assign({}, ...transaction, {
+  //  amount: transaction.pricePaid.value,
+  //  currencyCode: transaction.pricePaid.currency
+  // })
+  Transaction: transaction => {
+    transaction.amount = transaction.pricePaid.value;
+    transaction.currencyCode = transaction.pricePaid.currency;
+
+    return transaction;
+  }
 };

@@ -26,7 +26,7 @@ type Price {
 }
 
 type Transaction {
-    _id: ID!,
+    _id: String,
     pricePaid: Price,
     priceConverted: Price,
     amount: Float,

@@ -1,5 +1,5 @@
 const Transaction = require('../../models/transaction');
-const ScalarType = require('./resolverMap');
+const { Date: DateMapper, Transaction: TransactionMapper } = require('./resolverMap');
 const config = require('../../config/config');
 const currencyConverter = require('../../util/currencyConverter');
 
@@ -8,9 +8,13 @@ const findTransactions = (limit = 0) => Transaction.find({})
   .limit(limit)
   .exec();
 
-const findTransaction = transactionId => Transaction.findById(transactionId)
-  // .lean()
-  .exec();
+const findTransaction = async transactionId => {
+  const transaction = await Transaction.findById(transactionId)
+    // .lean()
+    .exec();
+
+  return TransactionMapper(transaction);
+};
 
 const defaultCurrency = () => config.currency;
 
@@ -29,7 +33,7 @@ const amountFrom = async (startFrom = new Date()) => {
 const addTransaction = async (transaction, reporter) => {
   const priceConverted = await currencyConverter(transaction.amount, transaction.currencyCode, transaction.invoiceDate);
 
-  return new Transaction({
+  return TransactionMapper(await new Transaction({
     pricePaid: {
       value: transaction.amount,
       currency: transaction.currencyCode
@@ -40,14 +44,14 @@ const addTransaction = async (transaction, reporter) => {
     invoiceDate: transaction.invoiceDate,
     user: transaction.user,
     reporter
-  }).save();
+  }).save());
 };
 
 const removeTransaction = transactionId => Transaction.findOneAndDelete({ _id: transactionId });
 
 const updateTransaction = async (transactionId, transaction) => {
   const priceConverted = await currencyConverter(transaction.amount, transaction.currencyCode, transaction.invoiceDate);
-  return Transaction.findOneAndUpdate({
+  return TransactionMapper(await Transaction.findOneAndUpdate({
     _id: transactionId
   }, {
     pricePaid: {
@@ -62,11 +66,11 @@ const updateTransaction = async (transactionId, transaction) => {
   }, {
     new: true,
     omitUndefined: true
-  });
+  }));
 };
 
 module.exports = {
-  Date: ScalarType.Date,
+  Date: DateMapper,
   Query: {
     DefaultCurrency: () => defaultCurrency(),
     Transaction: (parent, { id }) => findTransaction(id),
