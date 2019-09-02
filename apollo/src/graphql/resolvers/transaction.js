@@ -25,7 +25,7 @@ const amountFrom = async (startFrom = new Date()) => {
     .exec();
 
   return res
-    .map(transaction => parseFloat(transaction.amount))
+    .map(transaction => parseFloat(transaction.priceConverted.value))
     .reduce((a, b) => a + b, 0)
     .toFixed(2);
 };
