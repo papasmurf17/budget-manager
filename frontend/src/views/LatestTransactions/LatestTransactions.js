@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import classnames from 'classnames';
 import distanceInWords from 'date-fns/distance_in_words';
+import numeral from 'numeral';
 import Typeahead from '@welld/react-components/lib/Typeahead';
 import Button from '@welld/react-components/lib/Button';
 import Icon from '@welld/react-components/lib/Icon';
@@ -74,7 +75,7 @@ const LatestTransactions = ({ transactions, history }) => (
       {
         transactions.length
           ? (
-            transactions.map(({ _id, invoiceDate, description, user, reporter, pricePaid }) => (
+            transactions.map(({ _id, invoiceDate, description, user, reporter, pricePaid, priceConverted }) => (
               <div
                 onClick={() => history.push(`/transactions/edit/${_id}`)}
                 className='item padding-15 flex'
@@ -83,17 +84,24 @@ const LatestTransactions = ({ transactions, history }) => (
                 tabIndex={0}
               >
                 <div className='flex-1 m-l-15'>
-                  <p className='recipients no-margin hint-text text-base'>{reporter}</p>
+                  <p className='recipients no-margin hint-text text-lg'>{reporter}</p>
                   <p className='subject no-margin'>{`${description}`}</p>
-                  <p
-                    className={
-                      classnames('font-bold', {
-                        'text-success': pricePaid.value > 0, 'text-danger': pricePaid.value < 0
-                      })
-                    }
-                  >
-                    {`${pricePaid.value} ${pricePaid.currency} `}
-                  </p>
+                  <div>
+                    <p
+                      className={
+                        classnames('inline font-bold text-2xl', {
+                          'text-success': pricePaid.value > 0, 'text-danger': pricePaid.value < 0
+                        })
+                      }
+                    >
+                      { `${numeral(pricePaid.value).format('0,0[.]00')} ${pricePaid.currency}` }
+                    </p>
+                    {pricePaid.currency === priceConverted.currency ? null : (
+                      <p className={classnames('inline ml-3 hint-text')}>
+                        { `(${numeral(priceConverted.value).format('0,0[.]00')} ${priceConverted.currency})` }
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <div className='datetime'>
                   {pricePaid.value < 0 ? 'Requested' : 'Provided' } by <b>{user}</b>,
