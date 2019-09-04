@@ -29,10 +29,6 @@ div.item {
     line-height: 1.8rem;
   }
 
-  & .datetime {
-    font-size: 1.19em;
-  }
-
   & .small {
     font-size: 1.19em;
   }

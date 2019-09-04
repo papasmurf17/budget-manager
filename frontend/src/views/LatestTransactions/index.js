@@ -19,7 +19,8 @@ export const FETCH_TRANSACTIONS = gql`
     description,
     invoiceDate,
     user,
-    reporter
+    reporter,
+    expenseType
   }
 }
 `;
