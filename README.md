@@ -4,3 +4,6 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
 # Budget Manager
 
+Web Application to track all the expenses.
+
+![Budget Manager](./frontend/public/assets/startup.png)
