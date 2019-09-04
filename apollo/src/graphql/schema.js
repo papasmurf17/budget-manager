@@ -36,8 +36,9 @@ const apolloServerConfiguration = new ApolloServer({
     }
   }
 });
-
+const apolloServerConfigurationMock = apolloServerConfiguration;
+apolloServerConfiguration.mocks = mocks;
 // GraphQL: Server
 module.exports = (process.env.NODE_ENV === 'mock')
-  ? new ApolloServer(Object.assign({}, apolloServerConfiguration, { mocks }))
+  ? new ApolloServer(apolloServerConfigurationMock)
   : new ApolloServer(apolloServerConfiguration);

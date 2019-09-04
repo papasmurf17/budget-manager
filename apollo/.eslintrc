@@ -7,9 +7,11 @@
         "promise"
     ],
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 9,
         "sourceType": "module",
-        "ecmaFeatures": {}
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
     },
     "env": {
         "node": true,
