@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Text from '@welld/react-components/lib/Text';
 import App from '../App';
+import Loading from '../Loading';
 import SessionExpiredModal from '../SessionExpiredModal';
 import { SessionContext, checkAuthentication, loadUserProfile, login, onAuthExpired } from '../../api/auth';
 
@@ -33,7 +33,7 @@ const AppBootstrap = () => {
 
   const isCheckingAuth = !isAuthenticated && !hasError;
   if (isCheckingAuth) {
-    return <Text>Loading...</Text>;
+    return <Loading />;
   }
 
   if (hasError) {

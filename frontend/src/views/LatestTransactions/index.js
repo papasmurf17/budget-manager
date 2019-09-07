@@ -1,8 +1,9 @@
 import React from 'react';
-import Text from '@welld/react-components/lib/Text';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Transactions from './LatestTransactions';
+import Error from '../../components/Error';
+import Loading from '../../components/Loading';
 
 export const FETCH_TRANSACTIONS = gql`
   query LastTransactions {
@@ -30,8 +31,8 @@ const LatestTransactionsContainer = props => (
     query={FETCH_TRANSACTIONS}
   >
     {({ loading, error, data }) => {
-      if (loading) { return <Text>Loading...</Text> }
-      if (error) { return <Text>Error!</Text> }
+      if (loading) { return <Loading /> }
+      if (error) { return <Error /> }
 
       return <Transactions transactions={data.Transactions} {...props} />;
     }}
