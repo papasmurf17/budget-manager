@@ -2,10 +2,10 @@ const express = require('express');
 const proxy = require('http-proxy-middleware');
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 
 // write to a new file named 2pac.txt
 fs.writeFile('build/keycloak.json', process.env.KEYCLOAK, err => {
