@@ -5,7 +5,7 @@ import Spinner from '@welld/react-components/lib/Spinner';
 const Loading = ({ spinnerType }) => (
   <div className='flex h-full'>
     <div className='m-auto text-center text-red-500'>
-      <Spinner />
+      <Spinner type={spinnerType} />
     </div>
   </div>
 );
@@ -15,7 +15,7 @@ Loading.propTypes = {
 };
 
 Loading.defaultProps = {
-  spinnerType: 'exclamation'
+  spinnerType: 'circle'
 };
 
 export default Loading;
