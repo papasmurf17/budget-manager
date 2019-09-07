@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import classnames from 'classnames';
 import distanceInWords from 'date-fns/distance_in_words';
-import numeral from 'numeral';
 import Typeahead from '@welld/react-components/lib/Typeahead';
 import Button from '@welld/react-components/lib/Button';
 import Icon from '@welld/react-components/lib/Icon';
@@ -98,11 +97,15 @@ const LatestTransactions = ({ transactions, history }) => (
                         })
                       }
                     >
-                      { `${numeral(pricePaid.value).format('0,0[.]00')} ${pricePaid.currency}` }
+                      { new Intl.NumberFormat('de-DE', {
+                        style: 'currency', currency: pricePaid.currency
+                      }).format(pricePaid.value) }
                     </p>
                     {pricePaid.currency === priceConverted.currency ? null : (
                       <p className={classnames('inline ml-3 hint-text')}>
-                        { `(${numeral(priceConverted.value).format('0,0[.]00')} ${priceConverted.currency})` }
+                      ({ new Intl.NumberFormat('de-DE', {
+                        style: 'currency', currency: priceConverted.currency
+                      }).format(priceConverted.value) })
                       </p>
                     )}
                   </div>

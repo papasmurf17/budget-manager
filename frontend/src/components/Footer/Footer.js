@@ -4,11 +4,10 @@ import { Query } from 'react-apollo';
 import startOfYear from 'date-fns/start_of_year';
 import Heading from '@welld/react-components/lib/Heading';
 import Text from '@welld/react-components/lib/Text';
-import numeral from 'numeral';
 
 const FETCH_TOTAL = gql`
   query Total($startFrom: Date) {
-    Total(startFrom: $startFrom) 
+    Total(startFrom: $startFrom)
   }
 `;
 
@@ -31,7 +30,9 @@ const Footer = () => (
 
           return (
             <Heading size='h3' className='text-3xl bold' color={Total < 0 ? 'danger' : 'success'}>
-              { `${numeral(Total).format('0,0[.]00')} CHF` }
+              { new Intl.NumberFormat('de-DE', {
+                style: 'currency', currency: 'CHF'
+              }).format(Total)}
             </Heading>
           );
         }}
