@@ -2,8 +2,7 @@
 Describe your issue here.
 
 ### Your environment
-* version of angular-translate
-* version of angular
+* version of budget-manager
 * which browser and its version
 
 ### Steps to reproduce
