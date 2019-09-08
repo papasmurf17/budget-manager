@@ -3,11 +3,11 @@ const cloneDeep = require('lodash/cloneDeep');
 const debug = require('debug')('bm');
 
 const { getUser } = require('../auth');
-const resolvers = require('./resolvers/transaction');
 
 const mocks = require('./mocks');
 
 const typeDefs = require('../schema');
+const resolvers = require('../resolvers');
 
 // GraphQL: Schema
 const apolloServerConfiguration = new ApolloServer({

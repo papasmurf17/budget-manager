@@ -19,14 +19,4 @@ module.exports = {
       return new Date(ast.value);
     },
   }),
-  // Transaction: transaction => Object.assign({}, ...transaction, {
-  //  amount: transaction.pricePaid.value,
-  //  currencyCode: transaction.pricePaid.currency
-  // })
-  Transaction: transaction => {
-    transaction.amount = transaction.pricePaid.value;
-    transaction.currencyCode = transaction.pricePaid.currency;
-
-    return transaction;
-  }
 };

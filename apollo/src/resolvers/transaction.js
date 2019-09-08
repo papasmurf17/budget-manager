@@ -1,7 +1,7 @@
-const Transaction = require('../../models/transaction');
-const { Date: DateMapper, Transaction: TransactionMapper } = require('./resolverMap');
-const config = require('../../config/config');
-const currencyConverter = require('../../util/currencyConverter');
+const Transaction = require('../models/transaction');
+const { Date: DateMapper, Transaction: TransactionMapper } = require('./customScalar');
+const config = require('../config/config');
+const currencyConverter = require('../util/currencyConverter');
 
 const findTransactions = (limit = 0) => Transaction.find({})
   .sort({ invoiceDate: 'descending' })
