@@ -27,13 +27,14 @@
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "keycloak-js": "4.8.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.12",
     "react": "^16.8.3",
     "react-apollo": "^2.5.2",
     "react-dom": "^16.8.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5",
-    "redux-thunk": "^2.3.0"
+    "react-scripts": "3.0.0",
+    "redux-thunk": "^2.3.0",
+    "snyk": "^1.226.0"
   },
   "repository": {
     "type": "git",
@@ -60,7 +61,9 @@
     "test:e2e": "yarn test --config ./setupIntegrationTests.js \"(.+)\\.e2e\\.spec\\.js$\"",
     "lint:all": "eslint src",
     "quality": "yarn sonar-scanner",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -110,5 +113,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "snyk": true
 }
