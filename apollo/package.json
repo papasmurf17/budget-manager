@@ -30,7 +30,8 @@
     "lodash": "^4.17.15",
     "migrate": "^1.6.2",
     "mongodb": "^3.3.0-beta2",
-    "mongoose": "^5.5.14"
+    "mongoose": "^5.5.14",
+    "snyk": "^1.226.0"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
@@ -50,7 +51,9 @@
     "test:unit": "echo 'No unit tests'",
     "test:e2e": "echo 'No e2e tests'",
     "lint:all": "eslint src",
-    "build": "yarn pack"
+    "build": "yarn pack",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -66,5 +69,6 @@
       "eslint --fix",
       "git add"
     ]
-  }
+  },
+  "snyk": true
 }
