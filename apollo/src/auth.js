@@ -1,8 +1,9 @@
 const debug = require('debug')('bm');
-const { ApolloError, AuthenticationError } = require('apollo-server');
+const { AuthenticationError } = require('apollo-server');
 const jwtDecode = require('jwt-decode');
 const intersection = require('lodash/intersection');
 const isEmpty = require('lodash/isEmpty');
+const get = require('lodash/get');
 
 const getUser = token => {
   if (token) {
@@ -11,10 +12,11 @@ const getUser = token => {
       username: payload.preferred_username,
       firstName: payload.given_name,
       lastName: payload.family_name,
-      email: payload.email
+      email: payload.email,
+      roles: get(payload, 'resource_access.budgetmanager.roles', [])
     };
-    debug(`user: ${userData.username}`);
-    return { userData };
+    debug(`user: ${userData.username} - roles: ${userData.roles}`);
+    return userData;
   }
 
   return null;
@@ -28,8 +30,6 @@ const hasContextUserData = userData => {
   }
 };
 
-
-
 const checkRoles = (userRoles, permitteRoles) => {
   if (isEmpty(intersection(permitteRoles, userRoles))) {
     throw new Error('User has not the right permission to change state');
@@ -39,5 +39,6 @@ const checkRoles = (userRoles, permitteRoles) => {
 
 module.exports = {
   getUser,
+  hasContextUserData,
   checkRoles,
 };

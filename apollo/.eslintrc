@@ -1,5 +1,5 @@
 {
-    "parser": "esprima",
+    "parser": "babel-eslint",
     "extends": [
         "airbnb-base"
     ],
@@ -7,11 +7,8 @@
         "promise"
     ],
     "parserOptions": {
-        "ecmaVersion": 9,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true
-        }
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
     "env": {
         "node": true,

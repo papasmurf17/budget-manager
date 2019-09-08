@@ -19,4 +19,9 @@ module.exports = {
       return new Date(ast.value);
     },
   }),
+  Transaction: transaction => {
+    transaction.amount = transaction.pricePaid.value;
+    transaction.currencyCode = transaction.pricePaid.currency;
+    return transaction;
+  }
 };

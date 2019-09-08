@@ -1,6 +1,6 @@
 const { ApolloServer } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server');
 const cloneDeep = require('lodash/cloneDeep');
-const debug = require('debug')('bm');
 
 const { getUser } = require('../auth');
 
@@ -13,16 +13,28 @@ const resolvers = require('../resolvers');
 const apolloServerConfiguration = new ApolloServer({
   typeDefs,
   resolvers,
+  formatError: error => {
+    // remove the internal sequelize error message
+    // leave only the important validation error
+    const message = error.message
+      .replace('SequelizeValidationError: ', '')
+      .replace('Validation error: ', '');
+
+    return {
+      ...error,
+      message,
+    };
+  },
   context: ({ req }) => {
     // get the user token from the headers
     const token = req.headers.authorization || '';
-    
-    // try to retrieve a user with the token
-    const user = getUser(token);
 
-    if (!user) throw new AuthenticationError('you must be logged in to query this schema');
-    
-    return { user };
+    // try to retrieve a user with the token
+    const me = getUser(token);
+
+    if (!me) { throw new AuthenticationError('you must be logged in to query this schema') }
+
+    return { me };
   },
   playground: {
     endpoint: 'http://localhost:4000/graphql',

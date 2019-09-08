@@ -1,3 +1,5 @@
+const { combineResolvers } = require('graphql-resolvers');
+const { canEdit } = require('./authorization');
 const Transaction = require('../models/transaction');
 const { Date: DateMapper, Transaction: TransactionMapper } = require('./customScalar');
 const config = require('../config/config');
@@ -78,10 +80,19 @@ module.exports = {
     Total: async (parent, { startFrom }) => amountFrom(startFrom),
   },
   Mutation: {
-    addTransaction: (parent, { transaction }, context) => addTransaction(
-      transaction, `${context.userData.firstName} ${context.userData.lastName}`
+    addTransaction: combineResolvers(
+      canEdit,
+      (parent, { transaction }, { me }) => addTransaction(
+        transaction, `${me.firstName} ${me.lastName}`
+      )
     ),
-    removeTransaction: (parent, { id }) => removeTransaction(id),
-    updateTransaction: (parent, { id, transaction }) => updateTransaction(id, transaction)
+    removeTransaction: combineResolvers(
+      canEdit,
+      (parent, { id }) => removeTransaction(id)
+    ),
+    updateTransaction: combineResolvers(
+      canEdit,
+      (parent, { id, transaction }) => updateTransaction(id, transaction)
+    )
   }
 };
