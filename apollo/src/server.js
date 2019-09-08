@@ -1,7 +1,7 @@
 const express = require('express');
 const debug = require('debug')('bm');
 
-const apolloServerConfiguration = require('./graphql/schema');
+const apolloServerConfiguration = require('./graphql/apolloServerConfiguration');
 const mongoose = require('./config/mongoose');
 
 mongoose();
