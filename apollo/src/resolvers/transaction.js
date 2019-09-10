@@ -50,6 +50,8 @@ module.exports = {
     DefaultCurrency: () => config.currency,
     Transaction: async (parent, { id }, { models }) => TransactionMapper(await models.transaction.findById(id)),
     Transactions: (parent, { limit }, { models }) => models.transaction.findTransactions(limit),
+    SearchTransactions:
+      (parent, { limit, searchTerm }, { models }) => models.transaction.searchTransactions(limit, searchTerm),
     Total: async (parent, { startFrom }, { models }) => {
       const transactions = await models.transaction.findByInvoiceDateGraterThan(startFrom);
 

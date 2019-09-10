@@ -1,5 +1,4 @@
 /* eslint-disable func-names */
-const debug = require('debug')('bm');
 const mongoose = require('mongoose');
 
 const { Schema, Number } = mongoose;
@@ -28,8 +27,11 @@ transactionSchema.statics.findTransactions = function (limit = 0) {
     .exec();
 };
 
-transactionSchema.statics.findById = function (transactionId) {
-  return this.findById(transactionId).exec();
+transactionSchema.statics.searchTransactions = function (limit = 0, searchTerm) {
+  return this.find({ $text: { $search: searchTerm } })
+    .sort({ invoiceDate: 'descending' })
+    .limit(limit)
+    .exec();
 };
 
 transactionSchema.statics.findByInvoiceDateGraterThan = function (startFrom = new Date()) {
