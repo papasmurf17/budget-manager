@@ -29,6 +29,7 @@ export const FETCH_TRANSACTIONS = gql`
 const LatestTransactionsContainer = props => (
   <Query
     query={FETCH_TRANSACTIONS}
+    pollInterval={10000}
   >
     {({ loading, error, data }) => {
       if (loading) { return <Loading /> }
