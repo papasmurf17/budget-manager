@@ -3,43 +3,20 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import classnames from 'classnames';
 import distanceInWords from 'date-fns/distance_in_words';
-import Typeahead from '@welld/react-components/lib/Typeahead';
 import Button from '@welld/react-components/lib/Button';
 import Icon from '@welld/react-components/lib/Icon';
 import Badge from '@welld/react-components/lib/Badge';
 
 import './LatestTransactions.css';
 
+import TransactionsSearchBar from '../../components/TransactionsSearchBar';
 import CreateTransaction from '../CreateTransaction';
 import UpdateTransaction from '../UpdateTransaction';
-import DevConsole from '../../util/DevConsole';
-
-const getAsyncOptions = (input, callback) => {
-  const error = null;
-
-  setTimeout(() => {
-    callback(error, {
-      options: [
-        { value: 'one', label: 'One' },
-        { value: 'two', label: 'Two' }
-      ],
-      // Only set this to true when there are no more options,
-      // or more specific queries will not be sent to the server.
-      complete: true
-    });
-  }, 2000);
-};
 
 const LatestTransactions = ({ transactions, history }) => (
   <>
     <div className='flex items-end mt-8'>
-      <Typeahead
-        disabled
-        value=''
-        onChange={evt => DevConsole.log(evt)}
-        loadOptions={getAsyncOptions}
-        label='search a transaction'
-        labelHelp='you can search by: description, user, amount and reporter'
+      <TransactionsSearchBar
         className='flex-grow m-r-5'
       />
       <Button
