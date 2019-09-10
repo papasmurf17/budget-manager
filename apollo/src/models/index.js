@@ -1,5 +1,5 @@
-const transactionModel = require('./transaction');
+const transaction = require('./transaction');
 
-module.exports = [
-  transactionModel,
-];
+module.exports = {
+  transaction,
+};

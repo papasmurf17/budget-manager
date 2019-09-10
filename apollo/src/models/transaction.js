@@ -1,3 +1,5 @@
+/* eslint-disable func-names */
+const debug = require('debug')('bm');
 const mongoose = require('mongoose');
 
 const { Schema, Number } = mongoose;
@@ -19,4 +21,23 @@ const transactionSchema = new Schema({
   reporter: String
 });
 
-module.exports = mongoose.model('Transaction', transactionSchema);
+transactionSchema.statics.findTransactions = function (limit = 0) {
+  return this.find({})
+    .sort({ invoiceDate: 'descending' })
+    .limit(limit)
+    .exec();
+};
+
+transactionSchema.statics.findById = function (transactionId) {
+  return this.findById(transactionId).exec();
+};
+
+transactionSchema.statics.findByInvoiceDateGraterThan = function (startFrom = new Date()) {
+  return this.find({ invoiceDate: { $gte: startFrom } })
+    .lean()
+    .exec();
+};
+
+const Transaction = mongoose.model('Transaction', transactionSchema);
+
+module.exports = Transaction;

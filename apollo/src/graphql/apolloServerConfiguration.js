@@ -8,6 +8,7 @@ const mocks = require('./mocks');
 
 const typeDefs = require('../schema');
 const resolvers = require('../resolvers');
+const models = require('../models');
 
 // GraphQL: Schema
 const apolloServerConfiguration = new ApolloServer({
@@ -34,7 +35,10 @@ const apolloServerConfiguration = new ApolloServer({
 
     if (!me) { throw new AuthenticationError('you must be logged in to query this schema') }
 
-    return { me };
+    return {
+      models,
+      me
+    };
   },
   playground: {
     endpoint: 'http://localhost:4000/graphql',

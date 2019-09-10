@@ -5,33 +5,6 @@ const { Date: DateMapper, Transaction: TransactionMapper } = require('./customSc
 const config = require('../config/config');
 const currencyConverter = require('../util/currencyConverter');
 
-const findTransactions = (limit = 0) => Transaction.find({})
-  .sort({ invoiceDate: 'descending' })
-  .limit(limit)
-  .exec();
-
-const findTransaction = async transactionId => {
-  const transaction = await Transaction.findById(transactionId)
-    // .lean()
-    .exec();
-
-  return TransactionMapper(transaction);
-};
-
-const defaultCurrency = () => config.currency;
-
-const amountFrom = async (startFrom = new Date()) => {
-  const res = await Transaction
-    .find({ invoiceDate: { $gte: startFrom } })
-    .lean()
-    .exec();
-
-  return res
-    .map(transaction => parseFloat(transaction.priceConverted.value))
-    .reduce((a, b) => a + b, 0)
-    .toFixed(2);
-};
-
 const addTransaction = async (transaction, reporter) => {
   const priceConverted = await currencyConverter(transaction.amount, transaction.currencyCode, transaction.invoiceDate);
 
@@ -74,10 +47,17 @@ const updateTransaction = async (transactionId, transaction) => {
 module.exports = {
   Date: DateMapper,
   Query: {
-    DefaultCurrency: () => defaultCurrency(),
-    Transaction: (parent, { id }) => findTransaction(id),
-    Transactions: (parent, { limit }) => findTransactions(limit),
-    Total: async (parent, { startFrom }) => amountFrom(startFrom),
+    DefaultCurrency: () => config.currency,
+    Transaction: async (parent, { id }, { models }) => TransactionMapper(await models.transaction.findById(id)),
+    Transactions: (parent, { limit }, { models }) => models.transaction.findTransactions(limit),
+    Total: async (parent, { startFrom }, { models }) => {
+      const transactions = await models.transaction.findByInvoiceDateGraterThan(startFrom);
+
+      return transactions
+        .map(transaction => parseFloat(transaction.priceConverted.value))
+        .reduce((a, b) => a + b, 0)
+        .toFixed(2);
+    },
   },
   Mutation: {
     addTransaction: combineResolvers(
