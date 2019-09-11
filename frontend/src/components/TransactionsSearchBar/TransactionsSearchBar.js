@@ -11,9 +11,7 @@ const TransactionsSearchBar = ({ onChange, initValue, ...props }) => {
 
   useEffect(
     () => {
-      if (debouncedSearchTerm) {
-        onChange(debouncedSearchTerm);
-      }
+      onChange(debouncedSearchTerm);
     },
     [debouncedSearchTerm, onChange]
   );
