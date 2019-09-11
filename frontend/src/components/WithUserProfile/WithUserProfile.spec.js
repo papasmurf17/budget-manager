@@ -1,5 +1,5 @@
 import React from 'react';
-import { MockedProvider } from 'react-apollo/test-utils';
+import { MockedProvider } from '@apollo/react-testing';
 import wait from 'waait';
 import { mount } from 'enzyme';
 import WithUserProfile, { USER_PROFILE_QUERY } from './WithUserProfile';

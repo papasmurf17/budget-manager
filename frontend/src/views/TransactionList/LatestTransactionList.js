@@ -1,7 +1,8 @@
 import React from 'react';
-import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import Transactions from './LatestTransactions';
+import { useQuery } from '@apollo/react-hooks';
+
+import TransactionList from './TransactionList';
 import Error from '../../components/Error';
 import Loading from '../../components/Loading';
 
@@ -26,17 +27,15 @@ export const FETCH_TRANSACTIONS = gql`
 }
 `;
 
-const LatestTransactionsContainer = props => (
-  <Query
-    query={FETCH_TRANSACTIONS}
-  >
-    {({ loading, error, data }) => {
-      if (loading) { return <Loading /> }
-      if (error) { return <Error /> }
+const LatestTransactionList = props => {
+  const { loading, error, data } = useQuery(FETCH_TRANSACTIONS);
 
-      return <Transactions transactions={data.Transactions} {...props} />;
-    }}
-  </Query>
-);
+  if (loading) { return <Loading /> }
+  if (error) { return <Error /> }
 
-export default LatestTransactionsContainer;
+  return (
+    <TransactionList transactions={data.Transactions} {...props} />
+  );
+};
+
+export default LatestTransactionList;

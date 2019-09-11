@@ -43,6 +43,7 @@ module.exports = gql`
     extend type Query {
         DefaultCurrency: String
         Transactions(limit: Int): [Transaction]
+        SearchTransactions(limit: Int, searchTerm: String): [Transaction]
         Transaction(id: ID!): Transaction
         Total(startFrom: Date): Float
     }

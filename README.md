@@ -7,3 +7,7 @@
 Web Application to track all the expenses.
 
 ![Budget Manager](./frontend/public/assets/startup.png)
+
+# DB
+
+We use mongodb to store the transactions. We have a text index `db.transactions.createIndex( { "$**": "text" } )` to perform full text searches.
