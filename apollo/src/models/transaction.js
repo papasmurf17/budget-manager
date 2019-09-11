@@ -28,7 +28,11 @@ transactionSchema.statics.findTransactions = function (limit = 0) {
 };
 
 transactionSchema.statics.searchTransactions = function (limit = 0, searchTerm) {
-  return this.find({ $text: { $search: searchTerm } })
+  return this.find({})
+    .or([{ description: { $regex:  searchTerm, $options: 'i' } }])
+    .or([{ reporter: { $regex:  searchTerm, $options: 'i' } }])
+    .or([{ user: { $regex:  searchTerm, $options: 'i' } }])
+    .or([{ expenseType: { $regex:  searchTerm, $options: 'i' } }])
     .sort({ invoiceDate: 'descending' })
     .limit(limit)
     .exec();
