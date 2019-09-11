@@ -1,11 +1,16 @@
-.list-view div:hover {
-  background-color: #daeffd;
+.list-view {
+  & div:hover {
+    background-color: #daeffd;
+  }
+
+  & div.active {
+    background-color: #daeffd;
+  }
 }
 
 div.item {
   position: relative;
   border-bottom: .1rem solid rgba(230, 230, 230, 0.7);
-  cursor: pointer;
   height: 11.1rem;
 
   & p {
