@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TextInput from '@welld/react-components/lib/TextInput';
 
 import useDebounce from '../../hooks/use-debounced';
+import DevConsole from '../../util/DevConsole';
 
 const TransactionsSearchBar = ({ onChange, initValue, ...props }) => {
   const [searchTerm, setSearchTerm] = useState(initValue);
@@ -36,7 +37,7 @@ TransactionsSearchBar.propTypes = {
 };
 
 TransactionsSearchBar.defaultProps = {
-  onChange: val => console.log('onChange', val),
+  onChange: val => DevConsole('onChange', val),
   initValue: '',
 };
 

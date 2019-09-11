@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 
 import TransactionModal from '../../components/TransactionModal';
-import { FETCH_TRANSACTIONS } from '../LatestTransactions';
+import { FETCH_TRANSACTIONS } from '../TransactionList/LatestTransactionList';
 
 const CREATE_TRANSACTION = gql`
   mutation CreateTransaction($transaction: TransactionInput!) {
