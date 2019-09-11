@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import distanceInWords from 'date-fns/distance_in_words';
 import Badge from '@welld/react-components/lib/Badge';
 
+import Error from '../../components/Error';
+
 import './TransactionList.css';
 
 const TransactionList = ({ transactions, history }) => (
@@ -57,7 +59,7 @@ const TransactionList = ({ transactions, history }) => (
             </div>
           ))
         )
-        : 'There are no existing transactions'
+        : (<Error message='There are no existing transactions' icon='frown-o' />)
     }
   </div>
 );
