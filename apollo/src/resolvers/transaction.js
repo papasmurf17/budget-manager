@@ -1,5 +1,5 @@
 const { combineResolvers } = require('graphql-resolvers');
-const { canEdit } = require('./authorization');
+const { canEdit, canDelete } = require('./authorization');
 const Transaction = require('../models/transaction');
 const { Date: DateMapper, Transaction: TransactionMapper } = require('./customScalar');
 const config = require('../config/config');
@@ -69,7 +69,7 @@ module.exports = {
       )
     ),
     removeTransaction: combineResolvers(
-      canEdit,
+      canDelete,
       (parent, { id }) => removeTransaction(id)
     ),
     updateTransaction: combineResolvers(
