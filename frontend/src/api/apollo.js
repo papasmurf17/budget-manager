@@ -16,7 +16,7 @@ import typeDefs from './typedefs';
  * @returns {null}
  */
 const cacheUserProfile = (_, { profile }, { cache }) => {
-  const { username, firstName, lastName, email } = profile;
+  const { username, firstName, lastName, email, roles } = profile;
   cache.writeData({
     data: {
       profile: {
@@ -24,6 +24,7 @@ const cacheUserProfile = (_, { profile }, { cache }) => {
         firstName,
         lastName,
         email,
+        roles,
         id: username,
         __typename: 'Profile'
       }

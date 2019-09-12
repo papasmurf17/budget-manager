@@ -22,7 +22,10 @@ export const refreshToken = (minValidity = 5) => (
   keycloakClient.updateToken(minValidity).then(() => keycloakClient.token)
 );
 
-export const loadUserProfile = () => keycloakClient.loadUserProfile().then(profile => {
+export const getUserRoles = () => keycloakClient.tokenParsed.resource_access.budgetmanager.roles || [];
+
+export const loadUserProfile = () => keycloakClient.loadUserProfile().then(response => {
+  const profile = { roles: getUserRoles(), ...response };
   apolloClient.mutate({
     mutation: gql`
       mutation cacheUserProfile($profile: ProfileInput!) {
@@ -45,5 +48,6 @@ export default {
   login,
   logout,
   refreshToken,
+  getUserRoles,
   loadUserProfile
 };

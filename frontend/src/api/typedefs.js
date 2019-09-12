@@ -5,14 +5,16 @@ const typeDefs = gql`
     username: String!,
     firstName: String,
     lastName: String,
-    email: String!
+    email: String!,
+    roles: [String]
   }
 
   input ProfileInput {
     username: String!,
     firstName: String,
     lastName: String,
-    email: String!
+    email: String!,
+    roles: [String]
   }
 
   extend type Mutation {
