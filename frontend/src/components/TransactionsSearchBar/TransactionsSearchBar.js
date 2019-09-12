@@ -35,7 +35,7 @@ TransactionsSearchBar.propTypes = {
 };
 
 TransactionsSearchBar.defaultProps = {
-  onChange: val => DevConsole('onChange', val),
+  onChange: val => DevConsole.log('onChange', val),
   initValue: '',
 };
 

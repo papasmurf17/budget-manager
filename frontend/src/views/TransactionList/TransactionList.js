@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import distanceInWords from 'date-fns/distance_in_words';
 import Badge from '@welld/react-components/lib/Badge';
-import Button from '@welld/react-components/lib/Button';
-import ButtonGroup from '@welld/react-components/lib/ButtonGroup';
-import Icon from '@welld/react-components/lib/Icon';
 
 import Error from '../../components/Error';
+import TransactionToolbar from '../../components/TransactionToolbar';
 
 import './TransactionList.css';
 
@@ -59,17 +57,7 @@ const TransactionList = ({ transactions, history }) => (
                   {expenseType}
                 </Badge>
                 <div className='flex self-end transaction-toolbar mt-6'>
-                  <ButtonGroup color='success' size='tiny'>
-                    <Button onClick={() => history.push(`/transactions/edit/${_id}`)}>
-                      <Icon name='pencil' />
-                    </Button>
-                    <Button onClick={() => console.log('delete')} className='opacity-25 cursor-not-allowed'>
-                      <Icon name='trash' />
-                    </Button>
-                    <Button onClick={() => console.log('clone')} className='opacity-25 cursor-not-allowed'>
-                      <Icon name='clone' />
-                    </Button>
-                  </ButtonGroup>
+                  <TransactionToolbar history={history} id={_id} />
                 </div>
               </div>
             </div>
