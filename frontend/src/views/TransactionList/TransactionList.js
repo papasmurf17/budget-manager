@@ -50,23 +50,23 @@ const TransactionList = ({ transactions, history }) => (
                   )}
                 </div>
               </div>
-              <div className='flex justify-between flex-col'>
+              <div className='flex  flex-col'>
                 <p className='text-xl'>
                   {pricePaid.value < 0 ? 'Requested' : 'Provided' } by <b>{user}</b>,
                   {distanceInWords(new Date(), new Date(invoiceDate))}
                 </p>
-                <Badge type='edgy' color='warning' className='self-end'>
+                <Badge type='edgy' color='warning' className='self-end mt-2'>
                   {expenseType}
                 </Badge>
-                <div className='flex self-end'>
+                <div className='flex self-end transaction-toolbar mt-6'>
                   <ButtonGroup color='success' size='tiny'>
                     <Button onClick={() => history.push(`/transactions/edit/${_id}`)}>
                       <Icon name='pencil' />
                     </Button>
-                    <Button onClick={() => console.log('delete')}>
+                    <Button onClick={() => console.log('delete')} className='opacity-25 cursor-not-allowed'>
                       <Icon name='trash' />
                     </Button>
-                    <Button onClick={() => console.log('clone')}>
+                    <Button onClick={() => console.log('clone')} className='opacity-25 cursor-not-allowed'>
                       <Icon name='clone' />
                     </Button>
                   </ButtonGroup>

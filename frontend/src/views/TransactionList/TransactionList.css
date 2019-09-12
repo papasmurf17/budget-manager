@@ -1,10 +1,18 @@
 .list-view {
   & div:hover {
     background-color: #daeffd;
+
+    & .transaction-toolbar {
+      display: inline;
+    }
   }
 
   & div.active {
     background-color: #daeffd;
+  }
+
+  & .transaction-toolbar {
+    display: none;
   }
 }
 
