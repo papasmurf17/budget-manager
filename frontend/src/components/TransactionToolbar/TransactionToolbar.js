@@ -12,7 +12,7 @@ const TransactionToolbar = ({ history, id }) => (
     <Button onClick={() => history.push(`/transactions/edit/${id}`)}>
       <Icon name='pencil' />
     </Button>
-    <Button onClick={() => DevConsole.log('delete')} className='opacity-25 cursor-not-allowed'>
+    <Button onClick={() => history.push(`/transactions/delete/${id}`)}>
       <Icon name='trash' />
     </Button>
     <Button onClick={() => DevConsole.log('clone')} className='opacity-25 cursor-not-allowed'>

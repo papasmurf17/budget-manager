@@ -8,6 +8,7 @@ import TransactionList from '../TransactionList';
 import TransactionsSearchBar from '../../components/TransactionsSearchBar';
 import CreateTransaction from '../CreateTransaction';
 import UpdateTransaction from '../UpdateTransaction';
+import DeleteTransaction from '../DeleteTransaction';
 
 const Transactions = ({ history }) => {
   const [term, setTerm] = useState('');
@@ -42,6 +43,16 @@ const Transactions = ({ history }) => {
           render={
             props => (
               <UpdateTransaction
+                {...props}
+              />
+            )
+          }
+        />
+        <Route
+          path='/transactions/delete/:transactionId'
+          render={
+            props => (
+              <DeleteTransaction
                 {...props}
               />
             )
