@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
-import { Mutation, Query } from 'react-apollo';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 
 import TransactionModal from '../../components/TransactionModal';
 
@@ -43,51 +43,46 @@ export const FETCH_TRANSACTION = gql`
   }
 `;
 
-const UpdateTransaction = ({ history, match }) => (
-  <Query
-    query={FETCH_TRANSACTION}
-    variables={{ id: match.params.transactionId }}
-  >
-    {({ loading, error, data }) => {
-      if (error) { return 'Error!' }
-      if (loading) { return 'Loading...' }
+const UpdateTransaction = ({ history, match }) => {
+  const [updateTransaction] = useMutation(
+    UPDATE_TRANSACTION
+  );
 
-      const { Transaction } = data;
-      return (
-        <Mutation
-          mutation={UPDATE_TRANSACTION}
-          key={match.params.transactionId}
-        >
-          {updateTransaction => (
-            <TransactionModal
-              onSubmit={({ user, description, expenseType, amount, currencyCode, invoiceDate }) => (
-                updateTransaction({
-                  variables: {
-                    id: match.params.transactionId,
-                    transaction: {
-                      user,
-                      description,
-                      expenseType,
-                      amount,
-                      currencyCode,
-                      invoiceDate
-                    }
-                  }
-                }).then(() => {
-                  history.push({ pathname: '/transactions', search: history.location.search });
-                }).catch(() => {
-                  // TODO fire error notification.
-                })
-              )}
-              history={history}
-              transaction={Transaction}
-            />
-          )}
-        </Mutation>
-      );
-    }}
-  </Query>
-);
+  const { loading, error, data } = useQuery(FETCH_TRANSACTION, {
+    variables: { id: match.params.transactionId }
+  });
+
+  if (loading) { return null }
+  if (error) { return null }
+
+  const { Transaction: transaction } = data;
+
+  return (
+    <TransactionModal
+      onSubmit={({ user, description, expenseType, amount, currencyCode, invoiceDate }) => (
+        updateTransaction({
+          variables: {
+            id         : match.params.transactionId,
+            transaction: {
+              user,
+              description,
+              expenseType,
+              amount,
+              currencyCode,
+              invoiceDate
+            }
+          }
+        }).then(() => {
+          history.push({ pathname: '/transactions', search: history.location.search });
+        }).catch(() => {
+          // TODO fire error notification.
+        })
+      )}
+      history={history}
+      transaction={transaction}
+    />
+  );
+};
 
 UpdateTransaction.propTypes = {
   history: PropTypes.shape({
