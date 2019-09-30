@@ -28,7 +28,7 @@ const UPDATE_TRANSACTION = gql`
   }
 `;
 
-const FETCH_TRANSACTION = gql`
+export const FETCH_TRANSACTION = gql`
   query GetTransaction($id: ID!) {
     Transaction(id: $id) {
       _id

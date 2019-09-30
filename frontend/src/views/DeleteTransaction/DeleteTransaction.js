@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import remove from 'lodash/remove';
 
 import ConfirmationModal from '../../components/ConfirmationModal';
 import { FETCH_TRANSACTIONS } from '../TransactionList/LatestTransactionList';
+import { FETCH_TRANSACTION } from '../UpdateTransaction/UpdateTransaction';
 
 const DELETE_TRANSACTION = gql`
   mutation DeleteTransaction($id: ID!) {
@@ -32,10 +33,19 @@ const DeleteTransaction = ({ history, match }) => {
     }
   );
 
+  const { loading, error, data } = useQuery(FETCH_TRANSACTION, {
+    variables: { id: match.params.transactionId }
+  });
+
+  if (loading) { return null }
+  if (error) { return null }
+
+  const { Transaction: transaction } = data;
+
   return (
     <ConfirmationModal
       title='Delete transaction'
-      message={`Do you wanna delete [${match.params.transactionId}] transaction ?`}
+      message={`Do you wanna delete [${transaction.description}] transaction ?`}
       onConfirm={() => removeTransaction({ variables: { id: match.params.transactionId } })
         .then(() => {
           history.push({ pathname: '/transactions', search: history.location.search });
