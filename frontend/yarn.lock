@@ -1282,10 +1282,10 @@
     "@webassemblyjs/wast-parser" "1.7.11"
     "@xtuc/long" "4.2.1"
 
-"@welld/react-components@^0.6.2-c7991fbd":
-  version "0.6.2-c7991fbd"
-  resolved "https://nexus.welld.io/repository/npm-all/@welld/react-components/-/react-components-0.6.2-c7991fbd.tgz#3cfc5d12eeda2ef86c3a0a9bce291d12143d20b5"
-  integrity sha512-S3HP5+5VSJvJmccz27SWgpmAXUUcVx351LwFL8ZZIFiIm6hjq2PZxCnVPwp7TFp43b+HhOuqy92v+lr71i9vrg==
+"@welld/react-components@^0.6.2-RC.192":
+  version "0.6.2-RC.192"
+  resolved "https://nexus.welld.io/repository/npm-all/@welld/react-components/-/react-components-0.6.2-RC.192.tgz#88db16da3a555b8b9e83f771ab032f85310497eb"
+  integrity sha512-/RrpiB+3FzP5dwc5UCE1BHwB5u1teALqA9hqXKBlnXndjkL5quQe2ouzMLmV4dEtlAS4xGSjUtfcF5TTw+P1/A==
   dependencies:
     "@babel/runtime" "^7.1.2"
     classnames "^2.2.5"
