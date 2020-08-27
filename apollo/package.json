@@ -27,7 +27,7 @@
     "graphql-resolvers": "^0.3.3",
     "graphql-tools": "^4.0.4",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.17",
     "migrate": "^1.6.2",
     "mongodb": "^3.3.0-beta2",
     "mongoose": "^5.7.5"
